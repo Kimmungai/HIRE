@@ -50,58 +50,7 @@
         </div>
     </div>
   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    <!--<div class="bid-card">
-        <div class="part">
-            <small>日付:</small>
-            <p>2017/02/15</p>
-        </div>
-        <div class="part">
-            <small>依頼名:</small>
-            <p>Corporate Benz</p>
-        </div>
-        <div class="part">
-            <small>ハイヤー会社:</small>
-            <p>株式会社2</p>
-        </div>
-        <div class="part">
-            <small>金額:</small>
-            <p class="price">¥160,000</p>
-        </div>
-        <div class="part">
-            <small>状態:</small>
-            <p>未確定</p>
-        </div>
-        <div class="part">
-            <button class="details">内容見る</button>
-        </div>
-    </div>
-    <div class="bid-card">
-        <div class="part">
-            <small>日付:</small>
-            <p>2017/02/15</p>
-        </div>
-        <div class="part">
-            <small>依頼名:</small>
-            <p>Corporate Benz</p>
-        </div>
-        <div class="part">
-            <small>ハイヤー会社:</small>
-            <p>株式会社2</p>
-        </div>
-        <div class="part">
-            <small>金額:</small>
-            <p class="price">¥160,000</p>
-        </div>
-        <div class="part">
-            <small>状態:</small>
-            <p>未確定</p>
-        </div>
-        <div class="part">
-            <button class="details">内容見る</button>
-        </div>
-    </div>-->
 </div>
-
 
 </div>
 <?php $__env->stopSection(); ?>

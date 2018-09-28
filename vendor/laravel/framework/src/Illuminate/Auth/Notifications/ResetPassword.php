@@ -45,11 +45,8 @@ class ResetPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('東京ハイヤーCLUBサポートデスクです。')
-            ->line('アカウント パスワードを リセットするには、次の リンクをクリックしてください。')
-            ->action('パスワードをリセット', url('password/reset', $this->token))
-            ->line('このリンクをクリックしても機能しない場合は、URL をコピーして新しいブラウザ ウィンドウに貼り付けてください。')
-            ->line('このメールに心当たりがない場合、他の方がパスワードをリセットする際に誤ってお客様のメール アドレスを入力した可能性があります。リクエストした覚えがない場合は、何も行わずにこのメールを破棄してください。')
-            ->line('本メールは配信専用です。ご返信なさらぬようご注意ください。');
+            ->line('You are receiving this email because we received a password reset request for your account.')
+            ->action('Reset Password', url(config('app.url').route('password.reset', $this->token, false)))
+            ->line('If you did not request a password reset, no further action is required.');
     }
 }

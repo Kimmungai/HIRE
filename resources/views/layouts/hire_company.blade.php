@@ -67,7 +67,7 @@
           <a href="/chat"><i class="fa fa-comments" aria-hidden="true"></i>メッセージ<span id="notification"></span></a>
       </li>
     　<li>
-          <a href="/company_order_view_all"><i class="fa fa-list" aria-hidden="true"></i>依頼一覧<!--<span class="notify"></span>--></a>
+          <a href="/company_order_view_all"><i class="fa fa-list" aria-hidden="true"></i>依頼一覧<?php if($num_orders){?><span class="notify">{{$num_orders}}</span><?php }?></a>
       </li>
         <li>
           <a href="/my-bids"><i class="fa fa-list" aria-hidden="true"></i>提供履歴</a>

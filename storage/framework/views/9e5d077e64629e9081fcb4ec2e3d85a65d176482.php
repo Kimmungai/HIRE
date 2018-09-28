@@ -29,7 +29,7 @@
         <h1>ハイヤー手配の一括見積もりは東京ハイヤークラブ</h1>
         </div>
         <ul class="topnav" id="myTopnav">
-            <li><a href="index.html" target="_blank"><img class="logo" src="http://hiremitsumori.com/img/logo.png"></a></li>
+            <li><a href="<?php echo e(url('/')); ?>"><img class="logo" src="http://hiremitsumori.com/img/logo.png"></a></li>
             <li><a href="http://hiremitsumori.com/#about" class="smooth" target="_blank">ABOUT<br><small>当サービスについて</small></a></li>
             <li><a href="http://hiremitsumori.com/#plan" class="smooth" target="_blank">PLAN<br><small>ご利用プラン</small></a></li>
             <li><a href="http://hiremitsumori.com/#lineup" class="smooth" target="_blank">LINEUP<br><small>ラインナップ</small></a></li>

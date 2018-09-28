@@ -5,12 +5,20 @@ namespace Illuminate\Database\Eloquent\Relations;
 use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Traits\Macroable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 abstract class Relation
 {
+    use Macroable {
+        __call as macroCall;
+    }
+
     /**
      * The Eloquent query builder instance.
      *
@@ -200,7 +208,7 @@ abstract class Relation
     {
         return collect($models)->map(function ($value) use ($key) {
             return $key ? $value->getAttribute($key) : $value->getKey();
-        })->values()->unique()->all();
+        })->values()->unique()->sort()->all();
     }
 
     /**
@@ -320,6 +328,19 @@ abstract class Relation
     }
 
     /**
+     * Get the model associated with a custom polymorphic type.
+     *
+     * @param  string  $alias
+     * @return string|null
+     */
+    public static function getMorphedModel($alias)
+    {
+        return array_key_exists($alias, self::$morphMap)
+            ? self::$morphMap[$alias]
+            : null;
+    }
+
+    /**
      * Handle dynamic method calls to the relationship.
      *
      * @param  string  $method
@@ -328,6 +349,10 @@ abstract class Relation
      */
     public function __call($method, $parameters)
     {
+        if (static::hasMacro($method)) {
+            return $this->macroCall($method, $parameters);
+        }
+
         $result = call_user_func_array([$this->query, $method], $parameters);
 
         if ($result === $this->query) {

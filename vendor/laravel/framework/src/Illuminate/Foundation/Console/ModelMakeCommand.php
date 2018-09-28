@@ -36,7 +36,7 @@ class ModelMakeCommand extends GeneratorCommand
      */
     public function fire()
     {
-        if (parent::fire() === false) {
+        if (parent::fire() === false && ! $this->option('force')) {
             return;
         }
 
@@ -44,7 +44,7 @@ class ModelMakeCommand extends GeneratorCommand
             $this->createMigration();
         }
 
-        if ($this->option('controller')) {
+        if ($this->option('controller') || $this->option('resource')) {
             $this->createController();
         }
     }
@@ -73,9 +73,11 @@ class ModelMakeCommand extends GeneratorCommand
     {
         $controller = Str::studly(class_basename($this->argument('name')));
 
+        $modelName = $this->qualifyClass($this->getNameInput());
+
         $this->call('make:controller', [
             'name' => "{$controller}Controller",
-            '--resource' => $this->option('resource'),
+            '--model' => $this->option('resource') ? $modelName : null,
         ]);
     }
 
@@ -108,11 +110,13 @@ class ModelMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
+            ['force', 'f', InputOption::VALUE_NONE, 'Create the class even if the model already exists.'],
+
             ['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file for the model.'],
 
             ['controller', 'c', InputOption::VALUE_NONE, 'Create a new controller for the model.'],
 
-            ['resource', 'r', InputOption::VALUE_NONE, 'Indicates if the generated controller should be a resource controller'],
+            ['resource', 'r', InputOption::VALUE_NONE, 'Indicates if the generated controller should be a resource controller.'],
         ];
     }
 }

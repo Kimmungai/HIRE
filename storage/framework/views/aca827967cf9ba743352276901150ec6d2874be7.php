@@ -61,14 +61,14 @@
         <?php echo e(csrf_field()); ?><?php if(Auth::user()->admin_approved==0){echo 'アカウントは未承認です';} ?><?php if($orders[0]['bid_status']==1){echo '入札が閉まった';} ?>
         <input type="hidden" name="order-num" value="<?php echo e($orders[0]['id']); ?>" />
         <label>金額:</label>
-        <input name="bid-price" type="number" onkeyup="calculate_charges(this.value,<?php echo e($consumption_tax_rate); ?>,<?php echo e($excia_commission); ?>)" value="<?php if(isset($price)){echo $price;} ?>" required <?php if(Auth::user()->admin_approved==0 || $orders[0]['bid_status']==1){echo '無効';} ?>>
+        <input id="bid-price" name="bid-price" type="number" onkeyup="calculate_charges(this.value,<?php echo e($consumption_tax_rate); ?>,<?php echo e($excia_commission); ?>)" value="<?php if(isset($price)){echo $price;} ?>" required <?php if(Auth::user()->admin_approved==0 || $orders[0]['bid_status']==1){echo '無効';} ?>>
         <p class="youget"></p>
         <p class="handling"></p>
         <p class="tax"></p>
         <label>メッセージ:</label>
         <textarea name="bid-message" rows="6" cols="40" required></textarea>
         <?php if(Auth::user()->admin_approved==1){ if($orders[0]['bid_status']==0){?><button type="submit" class="bid">提供する</button> <?php }}?>
-        <?php if(Auth::user()->admin_approved==0 || $orders[0]['bid_status']==1){echo '無効';} ?>
+        <?php if(Auth::user()->admin_approved==0 || $orders[0]['bid_status']==1){echo '無効 disabled';} ?>
     </form>
 </div>
 
@@ -104,6 +104,7 @@
 
 </div>
 <script>
+  calculate_charges($('#bid-price').val(),<?php echo e($consumption_tax_rate); ?>,<?php echo e($excia_commission); ?>)
   function calculate_charges(input_price,consumption_tax_rate,excia_commission)
   {
     var excia_commission_payable=excia_commission * input_price;

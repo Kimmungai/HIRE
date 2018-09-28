@@ -84,7 +84,7 @@ $style = [
                                     <td style="<?php echo e($fontFamily); ?> <?php echo e($style['email-body_cell']); ?>">
                                         <!-- Greeting -->
                                         <h1 style="<?php echo e($style['header-1']); ?>">
-                                            登録誠にありがとうございました,<?php echo e($user->first_name); ?><?php echo e($user->last_name); ?>様ご登録ありがとうございます。
+                                            ご登録誠にありがとうございます。<?php echo e($user->first_name); ?><?php echo e($user->last_name); ?>様ご登録ありがとうございます。
                                         </h1>
 
                                         <!-- Intro -->

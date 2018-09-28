@@ -40,8 +40,14 @@ $(document).ready(function(){
   });
 
   // chat
+	
+ $("#toggle-chat a").on("click", function(event){
+	 event.preventDefault();
+ })
+	
   $("#toggle-chat").on("click", function(event){
       event.preventDefault();
+      $(".contact-list").css({marginLeft: "0"});
       $(".chat-open").fadeIn("fast");
   });
 

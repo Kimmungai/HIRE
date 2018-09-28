@@ -40,9 +40,7 @@ class users extends Controller
         }
         else if((Auth::user()->user_category)==0)
         {
-          $two_days_ago=date('Y-m-d H:i:s',time()-172800);
-          $num_orders=count(Order::where('bid_status','<>',2)->where('created_at','>=',$two_days_ago)->get());
-          return view('company-top', compact('client_data','price_agreed','num_companies_bidding','company_name','num_orders'));//company data
+          return view('company-top', compact('client_data','price_agreed','num_companies_bidding','company_name'));//company data
         }
         else if((Auth::user()->user_category)==1)
         {
@@ -100,7 +98,12 @@ class users extends Controller
     public function client_myapage()
     {
       $user_details=Auth::user();
-      return view('user-info',compact('user_details'));
+      if(Auth::user()->user_category == 0){
+        return view('company-info',compact('user_details'));
+      }elseif(Auth::user()->user_category == 1){
+        return view('user-info',compact('user_details'));
+      }
+
     }
     public function update_reg_details(Request $request)
     {
@@ -163,11 +166,6 @@ class users extends Controller
     }
     public function create(Request $request)
     {
-      /*if(empty($request->input('hire_comp')) || empty($request->input('hire_comp_fu')) || empty($request->input('hire_first_name'))
-    || empty($request->input('hire_first_name_fu')) || empty($request->input('hire_last_name')) || empty($request->input('hire_last_name_fu'))
-    || empty($request->input('zip')) || empty($request->input('hire_address')) || empty($request->input('hire_tel'))){
-        return back();
-      }*/
       if($request->input('cars')){
           $validatedData = [
             'hire_comp' => 'max:255',

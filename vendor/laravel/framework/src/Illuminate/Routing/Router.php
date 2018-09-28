@@ -203,9 +203,7 @@ class Router implements RegistrarContract, BindingRegistrar
      */
     public function any($uri, $action = null)
     {
-        $verbs = ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'];
-
-        return $this->addRoute($verbs, $uri, $action);
+        return $this->addRoute(self::$verbs, $uri, $action);
     }
 
     /**
@@ -251,6 +249,21 @@ class Router implements RegistrarContract, BindingRegistrar
         }
 
         $registrar->register($name, $controller, $options);
+    }
+
+    /**
+     * Route an api resource to a controller.
+     *
+     * @param  string  $name
+     * @param  string  $controller
+     * @param  array  $options
+     * @return void
+     */
+    public function apiResource($name, $controller, array $options = [])
+    {
+        $this->resource($name, $controller, array_merge([
+            'only' => ['index', 'show', 'store', 'update', 'destroy'],
+        ], $options));
     }
 
     /**
@@ -682,6 +695,27 @@ class Router implements RegistrarContract, BindingRegistrar
     }
 
     /**
+     * Check if a middlewareGroup with the given name exists.
+     *
+     * @param  string  $name
+     * @return bool
+     */
+    public function hasMiddlewareGroup($name)
+    {
+        return array_key_exists($name, $this->middlewareGroups);
+    }
+
+    /**
+     * Get all of the defined middleware groups.
+     *
+     * @return array
+     */
+    public function getMiddlewareGroups()
+    {
+        return $this->middlewareGroups;
+    }
+
+    /**
      * Register a group of middleware.
      *
      * @param  string  $name
@@ -919,7 +953,7 @@ class Router implements RegistrarContract, BindingRegistrar
      */
     public function currentRouteNamed($name)
     {
-        return $this->current() ? $this->current()->getName() == $name : false;
+        return $this->current() ? $this->current()->named($name) : false;
     }
 
     /**
@@ -983,7 +1017,7 @@ class Router implements RegistrarContract, BindingRegistrar
 
         // Password Reset Routes...
         $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-        $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+        $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
         $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
         $this->post('password/reset', 'Auth\ResetPasswordController@reset');
     }
