@@ -1,0 +1,670 @@
+/* Initial Regstration Forms */
+.form-register {
+    text-align: center;
+    padding: 40px 0;
+    form {
+        text-align: left;
+        background-color: $light-grey;
+        padding: 5% 10%;
+        @include border-radius(5px);
+        @include box-shadow($bshadow);
+        @include grid-container;
+        label {
+            font-weight: bold;
+            padding-top: 15px;
+            display: block;   
+            &:after {
+                content: "必須";
+                font-size: 10px;
+                padding: 3px;
+                line-height: 16px;
+                margin-left: 10px;
+                background-color: $dark-blue;
+                color: #fff;
+            }
+        }
+        
+        input, select {
+            width: 100%;
+            height: auto;
+            border-radius: 0px;
+            line-height: 1.8em;
+            margin-top: 5px;
+        }
+        
+        select {
+            height: 35px;
+        }
+        
+        input[type="submit"]{
+            width: auto;
+            margin: 30px auto;
+            text-align: center;
+            display: block;
+            border: 0;
+            background-color: $dark-blue;
+            color: #fff;
+            padding: 10px 40px;
+            @include border-radius(50px);
+        }
+    }
+}
+
+// error handling
+.has-error input {
+    border-color: $myred;
+}
+.has-success input {
+    border-color: $green;
+}
+.has-error {
+    color: $myred;
+}
+.has-success {
+    color: $green;
+}
+
+
+.half {
+    @include grid-column(12);
+    
+    @include grid-media($custom-neat-grid){
+        @include grid-column(6);
+    }
+}
+
+.full {
+    @include grid-column(12);
+}
+
+.submit {
+    margin: 20px auto;
+    text-align: center;
+    display: block;
+    max-width: 220px;
+    border: 0;
+    background-color: $dark-blue;
+    @include border-radius(50px);
+    color: #fff;
+    padding: 10px 40px;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.new-order {
+    text-align: center;
+    text-align: left;
+    background-color: #fff;
+    box-shadow: $bshadow;
+    @include border-radius(5px);
+    @include box-shadow($bshadow);
+    @include grid-container;
+    .stripe {
+        padding: 1% 4% 4% 4%;
+    }
+    .stripe:nth-child(even) {
+        background-color: $light-grey;
+    }
+    label {
+        font-weight: bold;
+        padding-top: 15px;
+        display: block;   
+        span{
+           font-size: 10px;
+            padding: 3px;
+            line-height: 16px;
+            margin-left: 10px;
+            background-color: $dark-blue;
+            color: #fff; 
+        }
+    }
+    
+    input {
+        display: inline-block;
+        width: 280px;
+        margin-right: 15px;
+        line-height: 1.8em;
+        margin-top: 5px;
+    }
+    
+    a {
+        display: inline-block;
+        width: 280px;
+        margin-right: 15px;
+        line-height: 1.8em;
+        margin-top: 5px;
+    }
+    
+    a:first-child {
+        background-color: $dark-grey;
+    }
+    
+}
+
+.place-order {
+    input.submit{
+        width: auto;
+        margin: 50px auto;
+        text-align: center;
+        display: block;
+        border: 0;
+        background-color: $dark-blue;
+        @include border-radius(50px);
+        color: #fff;
+        padding: 10px 40px;
+    }
+}
+
+.confirm-order .fix {
+    text-align: center;
+    a.submit {
+        display: inline-block;
+        border: 0;
+        background-color: $dark-blue;
+        @include border-radius(50px);
+        color: #fff;
+        padding: 10px 40px;
+        &:first-child {
+            background-color: $dark-grey;
+        }
+    }
+}
+
+.order-details {
+    background-color: #fff;
+    padding: 0 3% 2% 3%;
+    @include border-radius(5px);
+    @include box-shadow($bshadow);
+    border: 1px solid $green;
+    
+    .btn {
+        @include border-radius(3px);
+        padding: 10px 20px;
+        text-decoration: none;
+        margin-right: 5px;
+        display: inline-block;
+        color: #fff;
+        margin-bottom: 5px;
+    }
+    
+    .hold {
+        background-color: $dark-grey;
+    }
+    
+    .renew {
+        background-color: $green;
+    }
+    
+    .cancel {
+        background-color: $myred;
+    }
+    
+    span {
+        color: $green;
+    }
+    .date {
+        color: #fff;
+        background-color: $green;
+        padding: 10px 20px;
+        display: inline-block;
+    }
+    .order-no {
+        color: $dark-grey;
+        display: block;
+        line-height: 44px;
+        float: right;
+    }
+    .card-row {
+        @include grid-container;
+    }
+    
+    .card {
+        @include grid-column(12);
+    
+        @include grid-media($custom-neat-grid){
+            @include grid-column(5);
+        }
+        
+        @include border-radius(5px);
+        border: 1px solid #ccc;
+        padding: 2%;
+        margin-bottom: 5px;
+        
+        small {
+            display: block;
+            color: $green;
+            font-weight: bold;
+        }
+    }
+}
+
+.bidder-details {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+    small {
+        font-size: 11px;
+        background-color: $dark-grey;
+        color: #fff;
+        padding: 4px;
+    }
+    
+    
+    .bid-card {
+        background-color: #fff;
+        @include border-radius(5px);
+        @include box-shadow($bshadow);
+        border-top: 5px solid $dark-grey;
+        margin-bottom: 20px;
+        @include grid-container;
+        
+        .full {
+            padding-top: 10px;
+            .initial-message {
+                max-height: 150px;
+                padding: 4px 8px;
+                font-size: 14px;
+                background-color: $light-grey;
+                overflow: auto;
+            }
+        }
+        
+        .part {
+            @include grid-column(6);
+    
+            @include grid-media($custom-neat-grid){
+                @include grid-column(2);
+            }
+            
+            height: 100%;
+            padding-top: 10px;
+            
+            p {
+                margin-top: 8px;
+                font-size: 14px;
+            }
+            
+            .price {
+                    color: $green;
+                    font-weight: bold;
+                }
+            
+            i {
+                font-size: 24px;
+                color: #fff;
+                background-color: $dark-blue;
+                width: 50px;
+                height: 50px;
+                display: block;
+                margin-bottom: 15px;
+                @include border-radius(5px);
+                line-height: 50px;
+                text-align: center;
+                cursor: pointer;
+            }
+            .settle {
+                @include border-radius(3px);
+                background-color: $light-grey;
+                cursor: auto;
+                color: #fff;
+                padding: 13px 30px;
+                border: 0;
+                width: 100%;
+            }
+            .active {
+                background-color: $green;
+                cursor: pointer;
+            }
+        }
+    }
+    .pick {
+        border-top: 5px solid $green;
+    }
+    .hire {
+    .part {
+        @include grid-column(6);
+        @include grid-media($custom-neat-grid){
+            @include grid-column(3);
+        }
+    }
+}
+}
+
+
+.all-orders {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    .bid-card {
+        background-color: #fff;
+        @include border-radius(5px);
+        @include box-shadow($bshadow);
+        border-top: 5px solid $dark-grey;
+        margin-bottom: 20px;
+        @include grid-container;
+        .part {
+            @include grid-column(6);
+    
+            @include grid-media($custom-neat-grid){
+                @include grid-column(2);
+            }
+            
+            height: 100%;
+            padding-top: 10px;
+            
+            p {
+                margin-top: 8px;
+                font-size: 14px;
+            }
+            
+            .price {
+                    color: $green;
+                    font-weight: bold;
+                }
+            
+            small {
+                font-size: 11px;
+                background-color: $dark-grey;
+                color: #fff;
+                padding: 4px;
+            }
+            
+            i {
+                font-size: 24px;
+                color: #fff;
+                background-color: $dark-blue;
+                width: 50px;
+                height: 50px;
+                display: block;
+                margin-bottom: 15px;
+                @include border-radius(5px);
+                line-height: 50px;
+                text-align: center;
+                cursor: pointer;
+            }
+            .details {
+                display: block;
+                text-decoration: none;
+                background-color: $green;
+                cursor: auto;
+                color: #fff;
+                padding: 13px 30px;
+                border: 0;
+                width: auto;
+                text-align: center;
+            }
+        }
+    }
+    .pick {
+        border-top: 5px solid $green;
+    }
+    .hire {
+    .part {
+        @include grid-column(6);
+        @include grid-media($custom-neat-grid){
+            @include grid-column(3);
+        }
+    }
+}
+}
+
+
+
+.place-bid{
+    background-color: #fff;
+    border: solid $green;
+    border-width: 5px 0 0 0;
+    @include border-radius(5px);
+    @include box-shadow($bshadow);
+    margin-top: 20px;
+    padding: 0 2% 3% 2%;
+    display: inline-block;
+    max-width: 100%;
+    h3 {
+        color: $green;
+    }
+    span {
+        color: $green;
+        font-size: 18px;
+        line-height: 40px;
+        font-weight: bold;
+    }
+    
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+    }
+    input {
+        display: inline-block;
+        color: $green;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 40px;
+        padding-left: 10px;
+        
+    }
+    
+    .bid {
+        background-color: $green;
+        text-decoration: none;
+        display: inline-block;
+        border: 0;
+        cursor: pointer;
+        color: #fff;
+        padding: 13px 30px;
+        margin-top: 20px;
+        float: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    textarea {
+        display: block;
+        font-size: 16px;
+        padding: 10px;
+        max-width: 80%;
+    }
+}
+
+.order-card {
+    background-color: #fff;
+    @include border-radius(5px);
+    @include box-shadow($bshadow);
+    border-top: 5px solid $dark-grey;
+    margin-bottom: 20px;
+    
+    .date {
+        background-color: $green;
+        color: #fff;
+        display: inline-block;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+    
+    span {
+        color: $green;
+    }
+    
+    .new {
+        font-size: 11px;
+        color: #fff;
+        background-color: $myred;
+        padding: 2px 4px;
+        letter-spacing: 1px;
+        @include border-radius(5px);
+        margin-left: 15px;
+        display: inline-block;
+    }
+    
+    input {
+        line-height: 36px;
+        font-size: 18px;
+        font-weight: bold;
+        padding-left: 10px;
+        color: $green;
+        display: inline-block;
+        float: left;
+        margin-bottom: 5px;
+        margin-right: 10px;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    .bid {
+        display: inline-block;
+        float: left;
+        text-decoration: none;
+        font-size: 18px;
+        line-height: 42px;
+        height: 42px;
+        font-weight: bold;
+        width: 225px;
+        background-color: $light-grey;
+        padding-left: 10px;
+        margin: 0;
+        margin-bottom: 5px;
+        margin-right: 10px;
+        color: $green;
+    }
+    
+    .bid-btn {
+        background-color: $light-grey;
+        color: #fff;
+        padding: 3px 12px;
+        line-height: 36px;
+        font-weight: bold;
+        border: 0;
+        cursor: default;
+        display: inline-block;
+        float: left;
+        margin-bottom: 5px;
+    }
+    
+    .active {
+        cursor: pointer;
+        background-color: $green;
+    }
+    
+    .avg-num {
+        line-height: 36px;
+        font-size: 20px;
+        color: $green;
+        font-weight: bold;
+    }
+    
+    .hrs {
+        background-color: $dark-grey;
+        font-size: 12px;
+        padding: 2px 5px;
+        color: #fff;
+        display: inline-block;
+        margin-bottom: 0;
+    }
+    
+    .row {
+        @include grid-container;
+        .half {
+            @include grid-column(12);
+            @include grid-media($custom-neat-grid){
+                @include grid-column(6);
+            }
+        }
+        .quarter {
+            @include grid-column(6);
+            @include grid-media($custom-neat-grid){
+                @include grid-column(3);
+            }
+        }
+    }
+    .more {
+        background-color: $light-grey;
+        display: block;
+        text-align: center;
+        padding: 2%;
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: $dark-grey;
+            padding: 8px 20px;
+            display: inline-block;
+            @include border-radius(20px);
+            
+        }
+    }
+}
+
+b, strong {
+    display: inline-block;
+}
+
+.mydetails {
+    background-color: #fff;
+    @include border-radius(5px);
+    padding: 1% 4%;
+    @include box-shadow($bshadow);
+    margin-bottom: 40px;
+    h3 {
+        color: $green;
+    }
+    input {
+        width: 240px;
+        height: 30px;
+        line-height: 30px;
+        padding-left: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    label {
+        font-weight: bold;
+        display: inline-block;
+        width: 200px;
+    }
+    p {
+        display: inline-block;
+        height: 34px;
+        line-height: 30px;
+        background-color: $light-grey;
+        padding-left: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 245px;
+        border: 1px solid #ccc;
+    }
+    .submit {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: $green;
+    }
+}
+
+.top-main {
+    list-style: none;
+    margin:0;
+    padding:0;
+    li {
+        display: inline-block;
+        a {
+            text-decoration: none;
+            display: block;
+            background-color: $dark-grey;
+            color: #fff;
+            padding: 10px 20px;
+            margin-top: 5px;
+            @include border-radius(3px);
+            i {
+                margin-right: 10px;
+            }
+        }
+        .add {
+            background-color: $green;
+        }
+    }
+}
+
+
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+    color: #ccc;
+}

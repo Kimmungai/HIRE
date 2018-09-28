@@ -1,0 +1,212 @@
+/*!
+ * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+ body {
+    overflow-x: hidden;
+ }
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #5b6f83;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #f8f8f8;
+}
+
+.sidebar-nav li a small {
+    background-color: #c81e4a;
+    color: #fff;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    margin-left: 10px;
+    text-align: center;
+    line-height: 20px;
+    padding: 1px 5px;
+}
+
+.sidebar-nav li a:hover, .sidebar-nav li a.current {
+    text-decoration: none;
+    color: #0dab88;
+    background: rgba(0,0,0,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand {
+    color: #fbfbfb;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+.btn-success, .btn-success:focus, .btn-success:active, .btn-success:visited, .btn-success:hover, .btn-success:active:focus {
+    background-color: #0dab88;
+}
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th {
+    line-height: 30px;
+}
+
+.table-bordered>tbody>tr>th {
+    font-size: 15px;
+}
+
+
+#custom-search-form button {
+        border: 0;
+        background: none;
+        /** belows styles are working good */
+        padding: 2px 5px;
+        margin-top: 2px;
+        position: relative;
+        left: -28px;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+.search-query {
+    width: 250px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+.search-query:focus + button {
+        z-index: 3;
+    }
+
+.form-search {
+    margin-top: 20px;
+}
+
+select {
+    height: 30px;
+}
+
+.message-text {
+    background-color: #ddd;
+    padding: 3%;
+    height: 500px;
+    overflow: auto;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: #0dab88;
+    border-color: #0dab88;
+}
+
+.pagination>li>a, .pagination>li>span {
+    color: #0dab88;
+}
+
+.table-message {
+    width: 400px;
+    height: 300px;
+    display: block;
+    overflow: auto;
+    white-space: normal;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}

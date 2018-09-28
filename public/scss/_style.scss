@@ -1,0 +1,61 @@
+/* Variables */
+
+$dark-grey: #5b6f83;
+$light-grey: #e6e9ed;
+$white: #f8f8f8;
+$green: #0dab88;
+$dark-blue: #3C6A98;
+$myred: #DE273E;
+$mainfont: sans-serif;
+$bshadow: 0px 5px 20px 0px rgba(0,0,0,0.19);
+$fshadow: 0px 0px 5px rgba(22, 22, 22, 0.75);
+
+
+/* mixins */
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin box-shadow($bshadow) {
+  -webkit-box-shadow: $bshadow;
+     -moz-box-shadow: $bshadow;
+      -ms-box-shadow: $bshadow;
+          box-shadow: $bshadow;
+}
+
+@mixin text-shadow($fshadow) {
+  -webkit-text-shadow: $bshadow;
+     -moz-text-shadow: $bshadow;
+      -ms-text-shadow: $bshadow;
+          text-shadow: $bshadow;
+}
+
+/* Media query */
+
+$custom-neat-grid: (
+  columns: 12,
+  gutter: 20px,
+  media: 768px,
+);
+
+/* General */
+
+body {
+    background-color: $white;
+    font-size: 16px;
+    font-family: $mainfont;
+    color: $dark-grey;
+    min-width: 320px;
+}
+
+.container {
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
+    @media (max-width: 768px){
+        font-size: 80%;
+    }
+}

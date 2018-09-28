@@ -1,0 +1,272 @@
+.chat {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    .chat-btn {
+        a {
+            display: block;
+            background-color: #fff;
+            @include border-radius(4px);
+            height: 50px;
+            width: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 26px;
+            color: $dark-grey;
+        }
+        .notify {
+            font-size: 10px;
+            background-color: $myred;
+            position: absolute;
+            display: inline-block;
+            height: 15px;
+            line-height: 15px;
+            color: #fff;
+            width: 15px;
+            text-align: center;
+            border-radius: 15px;
+            top: 5px;
+            right: 5px;
+        }
+    }
+    .chat-open {
+        width: 240px;
+        height: 320px;
+        position: fixed;
+        display: none;
+        bottom: 10px;
+        right: 10px;
+        background-color: #fff;
+        @include border-radius(5px);
+        overflow: hidden;
+        
+        
+        .chat-container {
+            width: 480px;
+            min-height: 320px
+        }
+        
+        .contact-list {
+            // margin-left: -240px;
+            width: 240px;
+            min-height: 320px;
+            height: auto;
+            display: block;
+            position: relative;
+            float: left;
+            
+            header {
+                background-color: $dark-grey;
+                padding: 6px 8px;
+                color: #fff;
+                overflow: hidden;
+                width: 224px;
+                z-index: 10;
+                a {
+                    color: #fff;
+                }
+                h5 {
+                    display: inline-block;
+                    margin: 0;
+                    font-size: 16px;
+                    line-height: 16px;
+                    }
+                i {
+                    font-size: 18px;
+                    margin: 0;
+                }
+            }
+            
+            a {
+                color: $dark-grey;
+                text-decoration: none;
+            }
+            
+            ul {
+                height: 284px;
+                padding: 0;
+                margin: 0;
+                overflow: auto;
+                
+                .unread {
+                    font-size: 8px;
+                    line-height: 14px;
+                    padding: 0 5px;
+                    position: relative;
+                    top: -12px;
+                    text-align: center;
+                    color: #fff;
+                    background-color: $myred;
+                    display: inline-block;
+                    border-radius: 8px;
+                }
+                
+                li {
+                    display: inline-block;
+                    a {
+                        display: block;
+                        padding: 8px 8px;
+                        border-bottom: 1px $light-grey solid;
+                        width: 224px;
+                        i {
+                            float: right;
+                            font-size: 18px;
+                            line-height: 28px;
+                        }
+                        
+                        &:before {
+                            content: "";
+                            height: 12px;
+                            width: 12px;
+                            margin-right: 8px;
+                            display: inline-block;
+                            @include border-radius(7px);
+                            background-color: $dark-grey;
+                        }
+                        &:hover{
+                            background-color: $light-grey;
+                        }
+                    }
+                    .on:before {
+                        background-color: $green;
+                        
+                    }
+                }
+            }
+            
+        }
+        .contact-message {
+            width: 240px;
+            min-height: 320px;
+            display: block;
+            height: auto;
+            position: relative;
+            float: left;
+            header {
+                background-color: $dark-grey;
+                padding: 6px 8px;
+                color: #fff;
+                overflow: hidden;
+                width: 224px;
+                z-index: 10;
+                a {
+                    color: #fff;
+                }
+                h5 {
+                    display: inline-block;
+                    margin: 0;
+                    font-size: 16px;
+                    line-height: 16px;
+                    &:after {
+                       content: "";
+                        height: 12px;
+                        width: 12px;
+                        margin-left: 8px;
+                        display: inline-block;
+                        @include border-radius(7px);
+                        background-color: $light-grey; 
+                    }
+                    }
+                .on:after {
+                        background-color: $green;
+                        
+                    }
+                i {
+                    font-size: 18px;
+                    margin: 0;
+                }
+            }
+            .scroll {
+                height: 220px;
+                padding-left: 6px;
+                padding-right: 6px;
+                overflow: auto;
+                font-size: 13px;
+                .to {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    display: inline-block;
+                    background-color: $dark-blue;
+                    width: 80%;
+                    margin-left: calc(20% - 12px);
+                    float: right;
+                    line-height: 1.4em;
+                    color: #fff;
+                    @include border-radius(5px);
+                    padding: 4px 6px;
+
+                    p {
+                        margin: 0;
+                    }
+                    
+                    .date {
+                        font-size: 9px;
+                        text-align: right;
+                        color: $green;
+                    }
+                    
+                }
+                .from {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    display: inline-block;
+                    background-color: $light-grey;
+                    width: 80%;
+                    margin-right: calc(20% - 12px);
+                    float: right;
+                    line-height: 1.4em;
+                    color: #fff;
+                    @include border-radius(5px);
+                    padding: 4px 6px;
+                    color: $dark-grey;
+                    
+                    p {
+                        margin: 0;
+                    }
+                    
+                    .date {
+                        font-size: 9px;
+                        color: $green;
+                    }
+                    
+                    .name {
+                        font-weight: bold;
+                    }
+                }
+            }
+            
+            .input {
+                display: block;
+                padding: 3px 6px;
+                height: 60px;
+                background-color: $light-grey;
+                padding-top: 6px;
+                padding-bottom: 6px;
+            }
+            
+            textarea {
+                width: 160px;
+                height: 44px;
+                display: inline-block;
+                float: left;
+                font-size: 12px;
+            }
+            
+            .send {
+                float: left;
+                display: inline-block;
+                height: 50px;
+                width: 50px;
+                line-height: 50px;
+                text-align: center;
+                margin-left: 10px;
+                background-color: $green;
+                color: #fff;
+                text-decoration: none;
+            }
+            
+        }
+    }
+    
+    
+}
