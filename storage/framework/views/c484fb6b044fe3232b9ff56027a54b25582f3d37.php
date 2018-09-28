@@ -51,7 +51,12 @@
     </div>
   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </div>
+<div class="col-lg-12">
+    <ul class="pagination pagination-sm" style="list-style-type:none">
+    <?php echo e($all_user_orders->links()); ?>
 
+    </ul>
+</div>
 </div>
 <?php $__env->stopSection(); ?>
 

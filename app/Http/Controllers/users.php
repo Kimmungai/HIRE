@@ -21,8 +21,18 @@ use Carbon\Carbon;
 class users extends Controller
 {
     public function index()
-    {
-      $client_data=Order::orderBy('id','Desc')->where('bid_status','=',1)->paginate(10);
+      { if(Auth::check()){
+            if(Auth::user()->user_category==0){
+              $condition=1;
+              $sign='=';
+              $test=1;
+            }elseif(Auth::user()->user_category==1){
+              $condition='user_id';
+              $sign='=';
+              $test=Auth::id();
+            }
+          }
+      $client_data=Order::orderBy('id','Desc')->where('bid_status','=',1)->where($condition,$sign,$test)->paginate(env('ORDERS_PER_PAGE',1));
       $count=0;
       foreach($client_data as $client_datum)
       {
@@ -32,7 +42,7 @@ class users extends Controller
         $company_name[$count]=User::where('id','=',$company_id)->value('company_name');
         $count++;
       }
-      if(Auth::user())
+      if(Auth::check())
       {
         if((Auth::user()->is_admin))
         {
@@ -65,19 +75,19 @@ class users extends Controller
     public function client_orders_all()
     {
         $user_id = Auth::id();
-        $all_user_orders=Order::with(['BidCompany','Bid'])->where('bid_status','<>',2)->where('user_id','=',$user_id)->orderBy('id','Desc')->get();
+        $all_user_orders=Order::with(['BidCompany','Bid'])->where('bid_status','<>',2)->where('user_id','=',$user_id)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
         return view('client_order_view_all',compact('all_user_orders'));
     }
     public function open_client_bids()
     {
       $user_id = Auth::id();
-      $all_user_orders=Order::with(['BidCompany','Bid'])->where('user_id', '=', $user_id)->where('bid_status','=',0)->orderBy('id','Desc')->get();
+      $all_user_orders=Order::with(['BidCompany','Bid'])->where('user_id', '=', $user_id)->where('bid_status','=',0)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
       return view('client_order_view_all',compact('all_user_orders'));
     }
     public function closed_client_bids()
     {
       $user_id = Auth::id();
-      $all_user_orders=Order::with(['BidCompany','Bid'])->where('user_id', '=', $user_id)->where('bid_status','=',1)->orderBy('id','Desc')->get();
+      $all_user_orders=Order::with(['BidCompany','Bid'])->where('user_id', '=', $user_id)->where('bid_status','=',1)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
       return view('client_order_view_all',compact('all_user_orders'));
     }
     public function set_pass(Request $request)

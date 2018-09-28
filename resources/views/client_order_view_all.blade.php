@@ -53,6 +53,10 @@
     </div>
   @endforeach
 </div>
-
+<div class="col-lg-12">
+    <ul class="pagination pagination-sm" style="list-style-type:none">
+    {{$all_user_orders->links()}}
+    </ul>
+</div>
 </div>
 @endsection
