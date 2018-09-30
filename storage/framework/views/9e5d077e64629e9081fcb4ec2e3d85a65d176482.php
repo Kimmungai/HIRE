@@ -114,7 +114,7 @@
     {
       $.get("/retrieve-messages/",
             {
-              id:chatting_company
+              id:$('#chatting_company').val()
             },
             function(data,status){
               var messages=JSON.stringify(data);
@@ -192,6 +192,7 @@
       $('.type_msg').removeClass('hidden');
       $('.messaging').removeClass('active_chat');
       $('#item-'+id).addClass('active_chat');
+      $('#msg_history').html('');
       $.get("/retrieve-messages/",
             {
               id:id

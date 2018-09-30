@@ -264,7 +264,7 @@
           			    </p>
                       </div>
                       <div class="full">
-                      <input type="submit" value="登録" />
+                      <input type="submit" value="登録" onclick="register_user('formRegister')"/>
                       </div>
                       <?php if(count($errors)): ?>
                         <span class="hidden" ng-init="formModel.hire_comp='<?php echo e(old('hire_comp')); ?>'"></span>

@@ -113,7 +113,7 @@
     {
       $.get("/retrieve-messages/",
             {
-              id:chatting_company
+              id:$('#chatting_company').val()
             },
             function(data,status){
               var messages=JSON.stringify(data);
@@ -182,7 +182,7 @@
     function open_company_chats(id,name,online_status)
     {
       chatting_company=id;
-      //$('#chatting_company').val(id);
+      $('#chatting_company').val(id);
       $('#chatting_company_name').val(name);
       //$('#company_title').removeClass();
       //$('#company_title').html(name);
@@ -191,6 +191,7 @@
       $('.type_msg').removeClass('hidden');
       $('.messaging').removeClass('active_chat');
       $('#item-'+id).addClass('active_chat');
+      $('#msg_history').html('');
       $.get("/retrieve-messages/",
             {
               id:id

@@ -23,9 +23,9 @@ class users extends Controller
     public function index()
       { if(Auth::check()){
             if(Auth::user()->user_category==0){
-              $condition=1;
+              $condition='id';
               $sign='=';
-              $test=1;
+              $test=true;
             }elseif(Auth::user()->user_category==1){
               $condition='user_id';
               $sign='=';
@@ -74,18 +74,23 @@ class users extends Controller
     }
     public function client_orders_all()
     {
+        if(Session::get('active_breadcrumb')!=2 && Session::get('active_breadcrumb')!=3){
+          Session::flash('active_breadcrumb', 1);
+        }
         $user_id = Auth::id();
         $all_user_orders=Order::with(['BidCompany','Bid'])->where('bid_status','<>',2)->where('user_id','=',$user_id)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
         return view('client_order_view_all',compact('all_user_orders'));
     }
     public function open_client_bids()
     {
+      Session::flash('active_breadcrumb', 3);
       $user_id = Auth::id();
       $all_user_orders=Order::with(['BidCompany','Bid'])->where('user_id', '=', $user_id)->where('bid_status','=',0)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
       return view('client_order_view_all',compact('all_user_orders'));
     }
     public function closed_client_bids()
     {
+      Session::flash('active_breadcrumb', 2);
       $user_id = Auth::id();
       $all_user_orders=Order::with(['BidCompany','Bid'])->where('user_id', '=', $user_id)->where('bid_status','=',1)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
       return view('client_order_view_all',compact('all_user_orders'));

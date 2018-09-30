@@ -62,6 +62,9 @@ class orders extends Controller
     }
     public function all_orders()
     {
+      if(Session::get('active_breadcrumb')!=2 && Session::get('active_breadcrumb')!=3){
+        Session::flash('active_breadcrumb', 1);
+      }
       $orders=Order::with(['BidCompany','Bid'])->where('bid_status','<>',2)->orderBy('id','desc')->paginate(env('ORDERS_PER_PAGE',5));
       foreach($orders as $order){
         if(!count(OrderViews::where('order_id','=',$order['id'])->where('user_id','=',Auth::id())->get())){
@@ -145,6 +148,7 @@ class orders extends Controller
     }
     public function open_bids()
     {
+      Session::flash('active_breadcrumb', 3);
       $orders=Order::where('bid_status','=',0)->where('bid_status','<>',2)->with(['BidCompany','Bid'])->paginate(env('ORDERS_PER_PAGE',5));
       foreach($orders as $order){
         if(!count(OrderViews::where('order_id','=',$order['id'])->where('user_id','=',Auth::id())->get())){
@@ -192,6 +196,7 @@ class orders extends Controller
     }
     public function closed_bids()
     {
+      Session::flash('active_breadcrumb', 2);
       $orders=Order::where('bid_status','=',1)->where('bid_status','<>',2)->with(['BidCompany','Bid'])->paginate(env('ORDERS_PER_PAGE',5));
       foreach($orders as $order){
         if(!count(OrderViews::where('order_id','=',$order['id'])->where('user_id','=',Auth::id())->get())){
@@ -219,6 +224,13 @@ class orders extends Controller
       //$orders=collect($orders)->reverse();
       $user_id=Order::where('id','=',$order_id)->where('bid_status','<>',2)->value('user_id');
       $user_name=User::where('id','=',$user_id)->value('company_name');
+      $bid_company_id=BidCompany::where('order_id', '=', $order_id)->where('user_id', '=', Auth::id())->value('id');
+
+      $already_bidded=Bid::where('bid_company_id','=',$bid_company_id)->first();
+      if(count($already_bidded)){
+        Session::flash('bid-successful', '一度しか入札できません!');
+        //return back();
+      }
       //$num_orders=Order::where('user_id','=',$user_id)->where('bid_status','<>',2)->select('id')->get();
       //$other_orders_lists=Order::where('id','<>',$order_id)->with(['BidCompany','Bid'])->get();
       return view('company_order_view',compact('orders','user_name','price'));

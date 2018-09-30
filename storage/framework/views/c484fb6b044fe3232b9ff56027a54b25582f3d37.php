@@ -7,9 +7,9 @@
     <li class="current"><a href="#">依頼履歴</a></li>
 </ol>
 <ol class="filter">
-    <li><a href="/open_client_bids">未確定のみ</a></li>
-    <li><a href="/closed_client_bids">確定のみ</a></li>
-    <li class="current"><a href="/client_order_view_all">全部</a></li>
+    <li <?php if(session('active_breadcrumb')==3) {echo 'class="current"';} ?>><a href="/open_client_bids">未確定のみ</a></li>
+    <li <?php if(session('active_breadcrumb')==2) {echo 'class="current"';} ?>><a href="/closed_client_bids">確定のみ</a></li>
+    <li <?php if(session('active_breadcrumb')==1 || session('active_breadcrumb')=='') {echo 'class="current"';} ?>><a href="/client_order_view_all">全部</a></li>
 </ol>
 <div class="all-orders">
     <!-- shop picked -->

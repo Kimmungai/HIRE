@@ -8,8 +8,8 @@
 </ol>
 <ul class="top-main">
     <!--<li><a class="add" href="new_order"><i class="fa fa-plus-circle" aria-hidden="true"></i>新しいご依頼</a></li>-->
-    <li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i>よくある質問</a></li>
-    <li><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>サービス流れ</a></li>
+    <!--<li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i>よくある質問</a></li>
+    <li><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>サービス流れ</a></li>-->
 </ul>
 <!-- last orders 3 -->
 <h3>最新依頼</h3>

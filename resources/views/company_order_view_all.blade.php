@@ -10,9 +10,9 @@
 </ol>
 
 <ol class="filter">
-    <li><a href="open-bids">未確定のみ</a></li>
-    <li><a href="closed-bids">確定のみ</a></li>
-    <li class="current"><a href="company_order_view_all">全部</a></li>
+    <li <?php if(session('active_breadcrumb')==3) {echo 'class="current"';} ?>><a href="open-bids">未確定のみ</a></li>
+    <li <?php if(session('active_breadcrumb')==2) {echo 'class="current"';} ?>><a href="closed-bids">確定のみ</a></li>
+    <li <?php if(session('active_breadcrumb')==1 || session('active_breadcrumb')=='') {echo 'class="current"';} ?>><a href="company_order_view_all">全部</a></li>
 </ol>
 <?php if(!isset($my_orders)){?>
 @foreach ($orders as $order)
@@ -151,6 +151,10 @@
   <!--end paginate-->
 <script>
 function bid(order_id,price){
+    if(price === ''){
+      alert("入札価格を入力してください");
+      return 0;
+    }
     window.open('/bid-with-comment/'+order_id+'/'+price,'_self');
 
 }
