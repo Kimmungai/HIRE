@@ -13,6 +13,8 @@ use App\ChatMessages;
 use Auth;
 use App\Mail\EmailVerification;
 use App\Mail\AccountDeleted;
+use App\Mail\clientChat;
+use App\Mail\companyChat;
 use Mail;
 use Session;
 use DB;
@@ -346,11 +348,18 @@ class users extends Controller
       {
         $client_id=$_GET['id'];
         $company_id=Auth::id();
+        $client=User::where('id','=',$client_id)->first();
+        $email=User::where('id','=',$company_id)->value('email');
+        mail($email,'send message test',$_GET['message']);
+        //$email = new clientChat($client,$_GET['message']);
+        //Mail::to($client->email)->send($email);
       }
       else if(Auth::user()->user_category==1)
       {
         $client_id=Auth::id();
         $company_id=$_GET['id'];
+        $email=User::where('id','=',$company_id)->value('email');
+        mail($email,'send message test',$_GET['message']);
       }
       $chat_users_id=ChatUsers::where('client_id','=',$client_id)->where('company_id','=',$company_id)->value('id');
       $message_data=$_GET['message'];

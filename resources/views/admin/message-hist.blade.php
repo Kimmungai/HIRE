@@ -8,10 +8,10 @@
                 <div class="row">
                 <div class="col-lg-12">
                 <form id="custom-search-form" class="form-search form-horizontal">
-                <div class="input-append span12">
+                <!--<div class="input-append span12">
                     <input type="text" class="search-query" placeholder="Search by email">
                     <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
-                </div>
+                </div>-->
                 </form>
                 </div>
 

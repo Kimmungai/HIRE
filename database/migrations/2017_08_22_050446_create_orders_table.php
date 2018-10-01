@@ -32,6 +32,8 @@ class CreateOrdersTable extends Migration
             $table->longText('remarks')->nullable();
             $table->integer('bid_id')->unsigned()->index();
             $table->string('deadline-date')->nullable();
+            $table->integer('admin_approved')->default(0);
+            $table->integer('suspended')->default(0);
             $table->timestamps();
         });
     }

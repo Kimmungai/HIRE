@@ -17,15 +17,20 @@ class admin extends Controller
 {
     public function company_accounts()
     {
-      $user_data=User::where('user_category','=',0)->where('admin_approved','<>',2)->where('is_admin','=',0)->paginate(10);
+      $user_data=User::where('user_category','=',0)->where('admin_approved','<>',2)->where('is_admin','=',0)->paginate(env('ORDERS_PER_PAGE',1));
       session(['active_element'=>1]);
       return view('admin.company-accounts',compact('user_data'));
       //return $user_data;
     }
     public function search_company(Request $request)
     {
+      if(session('active_element')==1){
+        $user_category=0;
+      }else{
+        $user_category=1;
+      }
       $search_query=$request->input('search-query');
-      $user_data=User::where('user_category','=',0)->where('company_name','like','%'.$search_query.'%')->where('admin_approved','<>',2)->orWhere('email','like','%'.$search_query.'%')->paginate(10);
+      $user_data=User::where('company_name','like','%'.$search_query.'%')->where('user_category','=',$user_category)->where('last_name','like','%'.$search_query.'%')->where('first_name','like','%'.$search_query.'%')->where('company_name','like','%'.$search_query.'%')->where('admin_approved','<>',2)->orWhere('email','like','%'.$search_query.'%')->paginate(env('ORDERS_PER_PAGE',1));
       if(empty($user_data))
       {
           Session::flash('no-search-results', '見つかりません!');
@@ -78,7 +83,7 @@ class admin extends Controller
     }
     public function client_accounts()
     {
-      $user_data=User::where('user_category','=',1)->where('admin_approved','<>',2)->where('is_admin','=',0)->paginate(10);
+      $user_data=User::where('user_category','=',1)->where('admin_approved','<>',2)->where('is_admin','=',0)->paginate(env('ORDERS_PER_PAGE',1));
       session(['active_element'=>2]);
       return view('admin.client-accounts',compact('user_data'));
       //return $user_data;
@@ -122,7 +127,7 @@ class admin extends Controller
     }
     public function admin_orders()
     {
-      $data=Order::paginate(10);
+      $data=Order::paginate(env('ORDERS_PER_PAGE',1));
       session(['active_element'=>3]);
       return view('admin.orders',compact('data'));
     }
@@ -139,11 +144,12 @@ class admin extends Controller
         $count++;
       }
       session(['active_element'=>3]);
-      return view('admin.order-details',compact('data','bid_companies','bidder_email','bidder_name','bidder_latest_price'));
+      $all_companies=User::where('user_category','=',0)->where('admin_approved','=',1)->get();
+      return view('admin.order-details',compact('data','bid_companies','bidder_email','bidder_name','bidder_latest_price','all_companies'));
     }
     public function transactions()
     {
-      $data=Order::where('bid_status','=',1)->paginate(10); //get finalized orders
+      $data=Order::where('bid_status','=',1)->paginate(env('ORDERS_PER_PAGE',1)); //get finalized orders
       $count=0;
       foreach($data as $order)
       {
@@ -181,7 +187,7 @@ class admin extends Controller
     }
     public function deleted_companies()
     {
-      $data=User::where('admin_approved','=',2)->where('is_admin','=',0)->paginate(10);
+      $data=User::where('admin_approved','=',2)->where('is_admin','=',0)->paginate(env('ORDERS_PER_PAGE',1));
       session(['active_element'=>6]);
       return view('admin.trash',compact('data'));
     }

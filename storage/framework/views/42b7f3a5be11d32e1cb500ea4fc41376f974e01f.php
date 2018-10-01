@@ -6,13 +6,12 @@
         <div class="row">
         <div class="col-lg-12">
         <form id="custom-search-form" class="form-search form-horizontal">
-        <div class="input-append span12">
+        <!--<div class="input-append span12">
             <input type="text" class="search-query" placeholder="Search">
             <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
-        </div>
+        </div>-->
         </form>
         </div>
-
             <div class="col-lg-12">
                 <div class="table-responsive">
                 <table class="table table-bordered table-hover">
@@ -46,7 +45,8 @@
                 </div>
                 <div class="col-lg-12">
                     <ul class="pagination pagination-sm">
-                    <li><?php echo e($user_data->links()); ?></li>
+                    <?php echo e($user_data->links()); ?>
+
                     <!--<li><a href="#" class="disabled"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
                     <li class="active"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>

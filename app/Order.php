@@ -20,6 +20,9 @@ class Order extends Model
     {
       return $this->hasManyThrough('App\Bid','App\BidCompany');
     }
-
+    public function company_viewable_orders()
+    {
+      return $this->hasMany('App\CompanyViewableOrders');
+    }
 
 }

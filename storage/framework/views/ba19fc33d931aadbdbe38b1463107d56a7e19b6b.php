@@ -5,6 +5,42 @@
                 <a href="#menu-toggle" class="btn btn-success" id="menu-toggle">Menu</a>
                 <a href="/admin-orders" class="btn btn-default"><i class="glyphicon glyphicon-backward"></i>  戻る</a>
                 <div class="row">
+                  <div class="col-lg-10 col-lg-offset-1">
+                    <h3>Order Options</h3>
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                            <th>Status</th>
+                            <td>
+                              <select class="form-control">
+                                <option>choose one</option>
+                                <option>Approve</option>
+                                <option>Suspend</option>
+                                <option>Delete</option>
+                              </select>
+                          </td>
+                          <td>
+                            <button class="btn btn-default">submit</button>
+                          </td>
+                        </tr>
+                        <tr>
+                            <th>Send to</th>
+                            <td>
+                              <select class="form-control">
+                                <option>choose one</option>
+                                <option>All companies</option>
+                                <?php $__currentLoopData = $all_companies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $company): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option><?php echo e($company->company_name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                              </select>
+                          </td>
+                          <td>
+                            <button class="btn btn-default">submit</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                     <div class="col-lg-12">
                         <h3>依頼内容</h3>
                         <div class="table-responsive">

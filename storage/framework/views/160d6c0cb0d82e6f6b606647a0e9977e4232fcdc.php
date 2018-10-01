@@ -9,10 +9,10 @@
                   <h3><?php echo e(Session::get('trash_page')); ?></h3>
                   <?php endif; ?>
                 <form id="custom-search-form" class="form-search form-horizontal">
-                <div class="input-append span12">
+                <!--<div class="input-append span12">
                     <input type="text" class="search-query" placeholder="Search">
                     <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
-                </div>
+                </div>-->
                 </form>
                 </div>
                     <div class="col-lg-12">
@@ -49,7 +49,7 @@
                                 <?php elseif($datum['admin_approved']==1): ?>
                                 <td>確認済み</td>
                                 <?php elseif($datum['admin_approved']==2): ?>
-                                <td>Deleted</td>
+                                <td>削除済み</td>
                                 <?php endif; ?>
                                 <td><a href="/admin-trash-details/<?php echo e($datum['id']); ?>" class="btn btn-default btn-block btn-sm">内容確認</a></td>
                             </tr>

@@ -8,10 +8,10 @@
         <form action="/search-company" method="POST" id="custom-search-form" class="form-search form-horizontal">
           <?php echo e(csrf_field()); ?>
 
-        <div class="input-append span12">
+        <!--<div class="input-append span12">
             <input name="search-query" type="text" class="search-query" placeholder="Search">
             <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
-        </div>
+        </div>-->
         </form>
         </div>
         <?php if(Session::has('no-search-results')): ?>

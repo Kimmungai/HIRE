@@ -46,7 +46,7 @@
 </div>
 </div>-->
 <div class="hero">
-    <h2>ログイン</h2>
+    <h2>パスワードをリセット</h2>
 </div>
 <div class="form-register" ng-controller="ConfirmCtrl">
             <h2> パスワードをリセット </h2>
@@ -71,7 +71,7 @@
                 </div>
                 <!-- Password check -->
             <div class="full">
-                <button type="submit" class="submit">ログイン</button>
+                <button type="submit" class="submit">リセット</button>
             </div>
             </form>
         </div>
