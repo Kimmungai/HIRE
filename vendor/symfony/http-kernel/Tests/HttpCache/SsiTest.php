@@ -11,12 +11,11 @@
 
 namespace Symfony\Component\HttpKernel\Tests\HttpCache;
 
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpCache\Ssi;
 
-class SsiTest extends TestCase
+class SsiTest extends \PHPUnit_Framework_TestCase
 {
     public function testHasSurrogateSsiCapability()
     {
@@ -198,10 +197,10 @@ class SsiTest extends TestCase
               ->method('getRequest')
               ->will($this->returnValue($request))
         ;
-        if (\is_array($response)) {
+        if (is_array($response)) {
             $cache->expects($this->any())
                   ->method('handle')
-                  ->will(\call_user_func_array(array($this, 'onConsecutiveCalls'), $response))
+                  ->will(call_user_func_array(array($this, 'onConsecutiveCalls'), $response))
             ;
         } else {
             $cache->expects($this->any())

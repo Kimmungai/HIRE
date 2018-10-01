@@ -14,10 +14,6 @@ trait CompilesInjections
     {
         $segments = explode(',', preg_replace("/[\(\)\\\"\']/", '', $expression));
 
-        $variable = trim($segments[0]);
-
-        $service = trim($segments[1]);
-
-        return "<?php \${$variable} = app('{$service}'); ?>";
+        return '<?php $'.trim($segments[0])." = app('".trim($segments[1])."'); ?>";
     }
 }

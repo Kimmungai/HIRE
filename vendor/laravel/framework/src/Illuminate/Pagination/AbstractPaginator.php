@@ -8,9 +8,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\Support\Htmlable;
 
-/**
- * @mixin \Illuminate\Support\Collection
- */
 abstract class AbstractPaginator implements Htmlable
 {
     /**
@@ -63,7 +60,7 @@ abstract class AbstractPaginator implements Htmlable
     protected $pageName = 'page';
 
     /**
-     * The current path resolver callback.
+     * The current page resolver callback.
      *
      * @var \Closure
      */
@@ -125,7 +122,7 @@ abstract class AbstractPaginator implements Htmlable
      *
      * @param  int  $start
      * @param  int  $end
-     * @return array
+     * @return string
      */
     public function getUrlRange($start, $end)
     {

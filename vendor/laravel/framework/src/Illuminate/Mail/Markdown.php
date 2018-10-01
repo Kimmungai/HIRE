@@ -5,7 +5,7 @@ namespace Illuminate\Mail;
 use Parsedown;
 use Illuminate\Support\Arr;
 use Illuminate\Support\HtmlString;
-use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\View\Factory as ViewFactory;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 class Markdown
@@ -34,7 +34,7 @@ class Markdown
     /**
      * Create a new Markdown renderer instance.
      *
-     * @param  \Illuminate\Contracts\View\Factory  $view
+     * @param  \Illuminate\View\Factory  $view
      * @param  array  $options
      * @return void
      */
@@ -77,13 +77,9 @@ class Markdown
     {
         $this->view->flushFinderCache();
 
-        $contents = $this->view->replaceNamespace(
+        return new HtmlString(preg_replace("/[\r\n]{2,}/", "\n\n", $this->view->replaceNamespace(
             'mail', $this->markdownComponentPaths()
-        )->make($view, $data)->render();
-
-        return new HtmlString(
-            html_entity_decode(preg_replace("/[\r\n]{2,}/", "\n\n", $contents), ENT_QUOTES, 'UTF-8')
-        );
+        )->make($view, $data)->render()));
     }
 
     /**

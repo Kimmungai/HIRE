@@ -14,8 +14,12 @@
     <div class="stripe">
         <label>注文名<span>必須</span>:</label>
         <select name="order_name">
-          <option <?php if (session('order_name')=='Order 1') {echo 'selected';}?>>Order 1</option>
-          <option <?php if (session('order_name')=='Order 2') {echo 'selected';}?>>Order 2</option>
+          <option <?php if (session('order_name')=='ビジネス送迎') {echo 'selected';}?>>ビジネス送迎</option>
+          <option <?php if (session('order_name')=='空港送迎') {echo 'selected';}?>>空港送迎</option>
+          <option <?php if (session('order_name')=='観光') {echo 'selected';}?>>観光</option>
+          <option <?php if (session('order_name')=='ゴルフ') {echo 'selected';}?>>ゴルフ</option>
+          <option <?php if (session('order_name')=='冠婚葬祭') {echo 'selected';}?>>冠婚葬祭</option>
+          <option <?php if (session('order_name')=='その他') {echo 'selected';}?>>その他</option>
         </select>
     </div>
     <div class="stripe">
@@ -23,6 +27,8 @@
         <input type="text" id="start_date" name="start_date" value="<?php if (session('start_date')) {echo session('start_date');}?>" required><input  type="text" id="start_time" name="start_time" value="<?php if (session('start_time')) {echo session('start_time');}?>" required>
         <label>お迎えの場所<span>必須</span>:</label>
         <input type="text" name="pick_up_address" value="<?php if (session('pick_up_address')) {echo session('pick_up_address');}?>" required>
+        <label>途中行程:</label>
+        <textarea name="journey" cols="40" rows="6" required><?php if (session('journey')) {echo session('journey');}?></textarea>
     </div>
     <div class="stripe">
         <label>終了予定日時<span>必須</span>:</label>
@@ -39,8 +45,6 @@
         <input type="text" name="baggage" placeholder="例えば：スーツケース　大:　3個" value="<?php if (session('baggage')) {echo session('baggage');}?>" required>
         <label>希望車種:</label>
         <input type="text" name="car_type" value="<?php if (session('car_type')) {echo session('car_type');}?>" required>
-        <label>旅:</label>
-        <input type="text" name="journey" value="<?php if (session('journey')) {echo session('journey');}?>" required>
         <label>備考:</label>
         <textarea name="details" cols="40" rows="6"><?php if (session('details')) {echo session('details');}?></textarea>
     </div>

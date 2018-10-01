@@ -29,31 +29,11 @@ trait CompilesStacks
     /**
      * Compile the end-push statements into valid PHP.
      *
-     * @return string
-     */
-    protected function compileEndpush()
-    {
-        return '<?php $__env->stopPush(); ?>';
-    }
-
-    /**
-     * Compile the prepend statements into valid PHP.
-     *
      * @param  string  $expression
      * @return string
      */
-    protected function compilePrepend($expression)
+    protected function compileEndpush($expression)
     {
-        return "<?php \$__env->startPrepend{$expression}; ?>";
-    }
-
-    /**
-     * Compile the end-prepend statements into valid PHP.
-     *
-     * @return string
-     */
-    protected function compileEndprepend()
-    {
-        return '<?php $__env->stopPrepend(); ?>';
+        return '<?php $__env->stopPush(); ?>';
     }
 }

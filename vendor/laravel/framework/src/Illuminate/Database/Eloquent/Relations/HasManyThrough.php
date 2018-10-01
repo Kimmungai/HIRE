@@ -247,7 +247,7 @@ class HasManyThrough extends Relation
             return $model;
         }
 
-        throw (new ModelNotFoundException)->setModel(get_class($this->related));
+        throw (new ModelNotFoundException)->setModel(get_class($this->parent));
     }
 
     /**
@@ -263,7 +263,7 @@ class HasManyThrough extends Relation
             return $this->findMany($id, $columns);
         }
 
-        return $this->where(
+        $this->where(
             $this->getRelated()->getQualifiedKeyName(), '=', $id
         )->first($columns);
     }
@@ -281,7 +281,7 @@ class HasManyThrough extends Relation
             return $this->getRelated()->newCollection();
         }
 
-        return $this->whereIn(
+        $this->whereIn(
             $this->getRelated()->getQualifiedKeyName(), $ids
         )->get($columns);
     }

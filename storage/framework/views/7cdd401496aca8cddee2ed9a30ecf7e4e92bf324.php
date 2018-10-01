@@ -7,11 +7,9 @@
 </ol>
 <ul class="top-main">
     <li><a class="add" href="/company_order_view_all"><i class="fa fa-list" aria-hidden="true"></i>依頼一覧</a></li>
-    <li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i>よくある質問</a></li>
-    <li><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>サービス流れ</a></li>
+    <!--<li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i>よくある質問</a></li>
+    <li><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>サービス流れ</a></li>-->
 </ul>
-<?php echo e($client_data); ?>
-
 <!-- last 3 orders this company bid on -->
 <h3>最新提供履歴</h3>
 <div class="all-orders">
@@ -52,56 +50,12 @@
     </div>
     <?php $count++;?>
   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    <!--<div class="bid-card">
-        <div class="part">
-            <small>日付:</small>
-            <p>2017/02/15</p>
-        </div>
-        <div class="part">
-            <small>依頼名:</small>
-            <p>Corporate Benz</p>
-        </div>
-        <div class="part">
-            <small>提供した会社数:</small>
-            <p>3</p>
-        </div>
-        <div class="part">
-            <small>平均金額:</small>
-            <p class="price">¥160,000</p>
-        </div>
-        <div class="part">
-            <small>状態:</small>
-            <p>未確定</p>
-        </div>
-        <div class="part">
-            <a href="#" class="details">内容見る</a>
-        </div>
-    </div>
-    <div class="bid-card">
-        <div class="part">
-            <small>日付:</small>
-            <p>2017/02/15</p>
-        </div>
-        <div class="part">
-            <small>依頼名:</small>
-            <p>Corporate Benz</p>
-        </div>
-        <div class="part">
-            <small>提供した会社数:</small>
-            <p>3</p>
-        </div>
-        <div class="part">
-            <small>平均金額:</small>
-            <p class="price">¥160,000</p>
-        </div>
-        <div class="part">
-            <small>状態:</small>
-            <p>未確定</p>
-        </div>
-        <div class="part">
-            <a href="#" class="details">内容見る</a>
-        </div>
-    </div>-->
+</div>
+<div class="col-lg-12">
+    <ul class="pagination pagination-sm" style="list-style-type:none">
+    <?php echo e($client_data->links()); ?>
+
+    </ul>
 </div>
 </div><!-- container end -->
 <?php $__env->stopSection(); ?>

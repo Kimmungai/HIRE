@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Collection as BaseCollection;
-use Illuminate\Database\Eloquent\JsonEncodingException;
 
 trait HasAttributes
 {
@@ -359,7 +358,7 @@ trait HasAttributes
      */
     protected function getAttributeFromArray($key)
     {
-        if (isset($this->attributes[$key])) {
+        if (array_key_exists($key, $this->attributes)) {
             return $this->attributes[$key];
         }
     }
@@ -527,7 +526,7 @@ trait HasAttributes
         }
 
         if ($this->isJsonCastable($key) && ! is_null($value)) {
-            $value = $this->castAttributeAsJson($key, $value);
+            $value = $this->asJson($value);
         }
 
         // If this attribute contains a JSON ->, we'll set the proper value in the
@@ -611,26 +610,6 @@ trait HasAttributes
     }
 
     /**
-     * Cast the given attribute to JSON.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @return string
-     */
-    protected function castAttributeAsJson($key, $value)
-    {
-        $value = $this->asJson($value);
-
-        if ($value === false) {
-            throw JsonEncodingException::forAttribute(
-                $this, $key, json_last_error_msg()
-            );
-        }
-
-        return $value;
-    }
-
-    /**
      * Encode the given value as JSON.
      *
      * @param  mixed  $value
@@ -679,9 +658,9 @@ trait HasAttributes
             return $value;
         }
 
-        // If the value is already a DateTime instance, we will just skip the rest of
-        // these checks since they will be a waste of time, and hinder performance
-        // when checking the field. We will just return the DateTime right away.
+         // If the value is already a DateTime instance, we will just skip the rest of
+         // these checks since they will be a waste of time, and hinder performance
+         // when checking the field. We will just return the DateTime right away.
         if ($value instanceof DateTimeInterface) {
             return new Carbon(
                 $value->format('Y-m-d H:i:s.u'), $value->getTimezone()
@@ -765,9 +744,7 @@ trait HasAttributes
     {
         $defaults = [static::CREATED_AT, static::UPDATED_AT];
 
-        return $this->usesTimestamps()
-                    ? array_unique(array_merge($this->dates, $defaults))
-                    : $this->dates;
+        return $this->timestamps ? array_merge($this->dates, $defaults) : $this->dates;
     }
 
     /**

@@ -13,9 +13,9 @@ namespace Symfony\Component\Console\Tester;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Output\StreamOutput;
 
 /**
  * Eases the testing of console commands.
@@ -31,6 +31,11 @@ class CommandTester
     private $inputs = array();
     private $statusCode;
 
+    /**
+     * Constructor.
+     *
+     * @param Command $command A Command instance to test
+     */
     public function __construct(Command $command)
     {
         $this->command = $command;
@@ -71,7 +76,9 @@ class CommandTester
         }
 
         $this->output = new StreamOutput(fopen('php://memory', 'w', false));
-        $this->output->setDecorated(isset($options['decorated']) ? $options['decorated'] : false);
+        if (isset($options['decorated'])) {
+            $this->output->setDecorated($options['decorated']);
+        }
         if (isset($options['verbosity'])) {
             $this->output->setVerbosity($options['verbosity']);
         }
@@ -132,8 +139,8 @@ class CommandTester
     /**
      * Sets the user inputs.
      *
-     * @param array $inputs An array of strings representing each input
-     *                      passed to the command input stream
+     * @param array An array of strings representing each input
+     *              passed to the command input stream.
      *
      * @return CommandTester
      */
@@ -148,7 +155,7 @@ class CommandTester
     {
         $stream = fopen('php://memory', 'r+', false);
 
-        fwrite($stream, implode(PHP_EOL, $inputs));
+        fputs($stream, implode(PHP_EOL, $inputs));
         rewind($stream);
 
         return $stream;

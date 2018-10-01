@@ -50,6 +50,7 @@
                     @endforeach
                         </table>
                         </div>
+
                     </div>
                     <div class="col-lg-12">
                         <ul class="pagination pagination-sm">

@@ -103,7 +103,7 @@
         <script>
         function restore_record()
         {
-          var restoreIt =confirm('復元してもよろしいですか?');
+          var restoreIt =confirm('Are you sure you want to restore the record?');
           if(restoreIt)
           {
             $('#company-details-admin').attr('action',"/restore_company_record").submit();
@@ -111,7 +111,7 @@
         }
         function delete_record_permanently()
         {
-          var deleteIt=confirm('永久に削除してもよろしいですか');
+          var deleteIt=confirm('Are you sure you want to delete the record?');
           if(deleteIt)
           {
             $('#company-details-admin').attr('action',"/delete_record_permanently").submit();

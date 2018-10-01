@@ -18,9 +18,10 @@ trait CompilesComponents
     /**
      * Compile the end-component statements into valid PHP.
      *
+     * @param  string  $expression
      * @return string
      */
-    protected function compileEndComponent()
+    protected function compileEndComponent($expression)
     {
         return '<?php echo $__env->renderComponent(); ?>';
     }
@@ -39,9 +40,10 @@ trait CompilesComponents
     /**
      * Compile the end-slot statements into valid PHP.
      *
+     * @param  string  $expression
      * @return string
      */
-    protected function compileEndSlot()
+    protected function compileEndSlot($expression)
     {
         return '<?php $__env->endSlot(); ?>';
     }

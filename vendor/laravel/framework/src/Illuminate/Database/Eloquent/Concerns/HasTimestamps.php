@@ -20,7 +20,7 @@ trait HasTimestamps
      */
     public function touch()
     {
-        if (! $this->usesTimestamps()) {
+        if (! $this->timestamps) {
             return false;
         }
 

@@ -2,7 +2,7 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            {{ config('app.name') }}
+            Product Name
         @endcomponent
     @endslot
 
@@ -10,18 +10,18 @@
     {{ $slot }}
 
     {{-- Subcopy --}}
-    @isset($subcopy)
+    @if (isset($subcopy))
         @slot('subcopy')
             @component('mail::subcopy')
                 {{ $subcopy }}
             @endcomponent
         @endslot
-    @endisset
+    @endif
 
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            © {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+            © 2016 {{ config('app.name') }}. All rights reserved.
         @endcomponent
     @endslot
 @endcomponent

@@ -19,10 +19,10 @@
                         </select>-->
                       </div>
                       <div class="half">
-                        <div class="account-box fill-color" id="company-Acc" onclick="select_account(this.id)">ハイヤー会社 <input id="check-company-Acc" name="cars" type="radio" class="hidden" value="0" checked /></div>
+                        <div class="account-box <?php if(old('cars') != ''){if(old('cars')=="0"){?>fill-color<?php }}else{?> fill-color<?php }?>" id="company-Acc" onclick="select_account(this.id)">ハイヤー会社 <input id="check-company-Acc" name="cars" type="radio" class="hidden" value="0" checked /></div>
                       </div>
                       <div class="half">
-                        <div class="account-box" id="user-Acc" onclick="select_account(this.id)">利用者 <input id="check-user-Acc" name="cars" type="radio" class="hidden" value="1" /></div>
+                        <div class="account-box <?php if(old('cars') != ''){if(old('cars')=="1"){?>fill-color<?php }}?>" id="user-Acc" onclick="select_account(this.id)">利用者 <input id="check-user-Acc" name="cars" type="radio" class="hidden" value="1" /></div>
                       </div>
                           <!-- Company name -->
                       <div class="full" ng-class="{
@@ -264,7 +264,7 @@
           			    </p>
                       </div>
                       <div class="full">
-                      <input type="submit" value="登録" />
+                      <input type="submit" value="登録" onclick="register_user('formRegister')"/>
                       </div>
                       <?php if(count($errors)): ?>
                         <span class="hidden" ng-init="formModel.hire_comp='<?php echo e(old('hire_comp')); ?>'"></span>

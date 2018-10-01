@@ -18,7 +18,7 @@ class MaintenanceModeException extends ServiceUnavailableHttpException
     /**
      * The number of seconds to wait before retrying.
      *
-     * @var int
+     * @var \Carbon\Carbon
      */
     public $retryAfter;
 
@@ -48,7 +48,7 @@ class MaintenanceModeException extends ServiceUnavailableHttpException
         if ($retryAfter) {
             $this->retryAfter = $retryAfter;
 
-            $this->willBeAvailableAt = Carbon::createFromTimestamp($time)->addSeconds($this->retryAfter);
+            $this->willBeAvailableAt = $this->wentDownAt->addSeconds($this->retryAfter);
         }
     }
 }

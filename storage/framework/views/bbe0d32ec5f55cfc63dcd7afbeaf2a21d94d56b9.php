@@ -7,9 +7,9 @@
     <li class="current"><a href="#">依頼履歴</a></li>
 </ol>
 <ol class="filter">
-    <li><a href="/open_client_bids">未確定のみ</a></li>
-    <li><a href="/closed_client_bids">確定のみ</a></li>
-    <li class="current"><a href="/client_order_view_all">全部</a></li>
+    <li <?php if(session('active_breadcrumb')==3) {echo 'class="current"';} ?>><a href="/open_client_bids">未確定のみ</a></li>
+    <li <?php if(session('active_breadcrumb')==2) {echo 'class="current"';} ?>><a href="/closed_client_bids">確定のみ</a></li>
+    <li <?php if(session('active_breadcrumb')==1 || session('active_breadcrumb')=='') {echo 'class="current"';} ?>><a href="/client_order_view_all">全部</a></li>
 </ol>
 <div class="all-orders">
     <!-- shop picked -->
@@ -50,59 +50,13 @@
         </div>
     </div>
   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    <!--<div class="bid-card">
-        <div class="part">
-            <small>日付:</small>
-            <p>2017/02/15</p>
-        </div>
-        <div class="part">
-            <small>依頼名:</small>
-            <p>Corporate Benz</p>
-        </div>
-        <div class="part">
-            <small>ハイヤー会社:</small>
-            <p>株式会社2</p>
-        </div>
-        <div class="part">
-            <small>金額:</small>
-            <p class="price">¥160,000</p>
-        </div>
-        <div class="part">
-            <small>状態:</small>
-            <p>未確定</p>
-        </div>
-        <div class="part">
-            <button class="details">内容見る</button>
-        </div>
-    </div>
-    <div class="bid-card">
-        <div class="part">
-            <small>日付:</small>
-            <p>2017/02/15</p>
-        </div>
-        <div class="part">
-            <small>依頼名:</small>
-            <p>Corporate Benz</p>
-        </div>
-        <div class="part">
-            <small>ハイヤー会社:</small>
-            <p>株式会社2</p>
-        </div>
-        <div class="part">
-            <small>金額:</small>
-            <p class="price">¥160,000</p>
-        </div>
-        <div class="part">
-            <small>状態:</small>
-            <p>未確定</p>
-        </div>
-        <div class="part">
-            <button class="details">内容見る</button>
-        </div>
-    </div>-->
 </div>
+<div class="col-lg-12">
+    <ul class="pagination pagination-sm" style="list-style-type:none">
+    <?php echo e($all_user_orders->links()); ?>
 
-
+    </ul>
+</div>
 </div>
 <?php $__env->stopSection(); ?>
 

@@ -11,14 +11,13 @@
 
 namespace Symfony\Component\HttpKernel\Tests\Fragment;
 
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
 use Symfony\Component\HttpKernel\Fragment\EsiFragmentRenderer;
 use Symfony\Component\HttpKernel\HttpCache\Esi;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\UriSigner;
 
-class EsiFragmentRendererTest extends TestCase
+class EsiFragmentRendererTest extends \PHPUnit_Framework_TestCase
 {
     public function testRenderFallbackToInlineStrategyIfEsiNotSupported()
     {
@@ -34,15 +33,7 @@ class EsiFragmentRendererTest extends TestCase
     {
         $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy(true), new UriSigner('foo'));
         $request = Request::create('/');
-        $reference = new ControllerReference('main_controller', array('foo' => new \stdClass()), array());
-        $strategy->render($reference, $request);
-    }
-
-    public function testRenderFallbackWithScalarIsNotDeprecated()
-    {
-        $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy(true), new UriSigner('foo'));
-        $request = Request::create('/');
-        $reference = new ControllerReference('main_controller', array('foo' => array(true)), array());
+        $reference = new ControllerReference('main_controller', array('foo' => array('a' => array(), 'b' => new \stdClass())), array());
         $strategy->render($reference, $request);
     }
 

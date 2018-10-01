@@ -114,7 +114,7 @@
     {
       $.get("/retrieve-messages/",
             {
-              id:chatting_company
+              id:$('#chatting_company').val()
             },
             function(data,status){
               var messages=JSON.stringify(data);
@@ -138,9 +138,12 @@
                     $('#msg_history').append(message);
                     //$("#msg_history").animate({ scrollTop: $('#msg_history').offset().top }, 1000);
                     //$(".mesgs").animate({scrollTop: $('#msg_history').get(0).scrollHeight}, 1000);
-                    $(".mesgs #msg_history").animate({scrollTop: $('.mesgs #msg_history').get(0).scrollHeight}, 2000);
+                    //$(".mesgs #msg_history").animate({scrollTop: $('.mesgs #msg_history').get(0).scrollHeight}, 2000);
+                    //$(".mesgs #msg_history").animate({scrollTop: $('.mesgs #msg_history').get(0).scrollHeight}, 100);
                 }
               }
+
+              //
           });
     }
   }
@@ -183,15 +186,17 @@
     function open_company_chats(id,name,online_status)
     {
       chatting_company=id;
-      //$('#chatting_company').val(id);
+      //
+      $('#chatting_company').val(id);
       $('#chatting_company_name').val(name);
       $('.chat_list').removeClass("active_chat");
       //$('#company_title').html(name);
       //if(online_status){$('#company_title').addClass('on');}else{$('#company_title').addClass('off');}
-      $('#open_company_id').val(id);
+      //$('#open_company_id').val(id);
       $('.type_msg').removeClass('hidden');
       $('.messaging').removeClass('active_chat');
       $('#item-'+id).addClass('active_chat');
+      $('#msg_history').html('');
       $.get("/retrieve-messages/",
             {
               id:id

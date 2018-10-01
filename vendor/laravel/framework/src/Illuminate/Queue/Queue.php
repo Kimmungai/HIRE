@@ -86,9 +86,7 @@ abstract class Queue
         $payload = json_encode($this->createPayloadArray($job, $data, $queue));
 
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new InvalidPayloadException(
-                'Unable to JSON encode payload. Error code: '.json_last_error()
-            );
+            throw new InvalidPayloadException;
         }
 
         return $payload;
@@ -118,7 +116,6 @@ abstract class Queue
     protected function createObjectPayload($job)
     {
         return [
-            'displayName' => $this->getDisplayName($job),
             'job' => 'Illuminate\Queue\CallQueuedHandler@call',
             'maxTries' => isset($job->tries) ? $job->tries : null,
             'timeout' => isset($job->timeout) ? $job->timeout : null,
@@ -130,18 +127,6 @@ abstract class Queue
     }
 
     /**
-     * Get the display name for the given job.
-     *
-     * @param  mixed  $job
-     * @return string
-     */
-    protected function getDisplayName($job)
-    {
-        return method_exists($job, 'displayName')
-                        ? $job->displayName() : get_class($job);
-    }
-
-    /**
      * Create a typical, string based queue payload array.
      *
      * @param  string  $job
@@ -150,11 +135,7 @@ abstract class Queue
      */
     protected function createStringPayload($job, $data)
     {
-        return [
-            'displayName' => is_string($job) ? explode('@', $job)[0] : null,
-            'job' => $job, 'maxTries' => null,
-            'timeout' => null, 'data' => $data,
-        ];
+        return ['job' => $job, 'data' => $data];
     }
 
     /**

@@ -12,6 +12,7 @@
         </div>-->
         </form>
         </div>
+
             <div class="col-lg-12">
                 <div class="table-responsive">
                 <table class="table table-bordered table-hover">
@@ -45,8 +46,7 @@
                 </div>
                 <div class="col-lg-12">
                     <ul class="pagination pagination-sm">
-                    <?php echo e($user_data->links()); ?>
-
+                    <li><?php echo e($user_data->links()); ?></li>
                     <!--<li><a href="#" class="disabled"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
                     <li class="active"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>

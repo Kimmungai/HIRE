@@ -53,7 +53,9 @@ class RedisStore extends TaggableStore implements Store
     {
         $value = $this->connection()->get($this->prefix.$key);
 
-        return ! is_null($value) ? $this->unserialize($value) : null;
+        if (! is_null($value) && $value !== false) {
+            return $this->unserialize($value);
+        }
     }
 
     /**
@@ -73,7 +75,7 @@ class RedisStore extends TaggableStore implements Store
         }, $keys));
 
         foreach ($values as $index => $value) {
-            $results[$keys[$index]] = ! is_null($value) ? $this->unserialize($value) : null;
+            $results[$keys[$index]] = $this->unserialize($value);
         }
 
         return $results;

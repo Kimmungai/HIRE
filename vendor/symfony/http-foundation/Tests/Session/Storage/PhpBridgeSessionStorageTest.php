@@ -11,9 +11,8 @@
 
 namespace Symfony\Component\HttpFoundation\Tests\Session\Storage;
 
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 /**
  * Test class for PhpSessionStorage.
@@ -25,7 +24,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-class PhpBridgeSessionStorageTest extends TestCase
+class PhpBridgeSessionStorageTest extends \PHPUnit_Framework_TestCase
 {
     private $savePath;
 
@@ -75,9 +74,9 @@ class PhpBridgeSessionStorageTest extends TestCase
         $this->assertFalse($storage->isStarted());
 
         $key = $storage->getMetadataBag()->getStorageKey();
-        $this->assertArrayNotHasKey($key, $_SESSION);
+        $this->assertFalse(isset($_SESSION[$key]));
         $storage->start();
-        $this->assertArrayHasKey($key, $_SESSION);
+        $this->assertTrue(isset($_SESSION[$key]));
     }
 
     public function testClear()

@@ -18,9 +18,10 @@ trait CompilesRawPhp
     /**
      * Compile end-php statements into valid PHP.
      *
+     * @param  string  $expression
      * @return string
      */
-    protected function compileEndphp()
+    protected function compileEndphp($expression)
     {
         return ' ?>';
     }
