@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Order;
 use App\BidCompany;
+use App\CompanyViewableOrders;
 use App\Bid;
 use Session;
 use App\ChatUsers;
@@ -133,7 +134,7 @@ class admin extends Controller
     }
     public function order_details($order_id)
     {
-      $data=Order::where('id','=',$order_id)->get();
+      $data=Order::with(['CompanyViewableOrders'])->where('id','=',$order_id)->get();
       $bid_companies=BidCompany::where('order_id','=',$order_id)->get();
       $count=0;
       foreach($bid_companies as $bid_company)
@@ -143,7 +144,7 @@ class admin extends Controller
         $bidder_latest_price[$count]=Bid::where('bid_company_id','=',$bid_company['id'])->orderBy('id','desc')->value('price');
         $count++;
       }
-      $all_companies=User::where('user_category','=',0)->where('admin_approved','=',1)->get();
+      $all_companies=User::where('user_category','=',0)->where('admin_approved','=',1)->where('is_admin','=',0)->get();
       session(['active_element'=>3]);
       return view('admin.order-details',compact('data','bid_companies','bidder_email','bidder_name','bidder_latest_price','all_companies'));
     }
@@ -259,5 +260,46 @@ class admin extends Controller
         $message_data=ChatMessages::where('chat_users_id','=',$_GET['chat_users_id'])->where('created_at', '>', Carbon::now()->subMonth(12))->get();
       }
       return $message_data;
+    }
+    public function admin_order_option(Request $request){
+      if($request->input("admin-option")==-1){
+        Order::where('id','=',$request->input("admin-option-order-id"))->update([
+          "admin_approved" => 0
+        ]);
+        Session::flash('update_success_admin', '更新しました!');
+        return back();
+      }elseif($request->input("admin-option")==0){
+        Order::where('id','=',$request->input("admin-option-order-id"))->update([
+          "admin_approved" => 1
+        ]);
+        Session::flash('update_success_admin', '更新しました!');
+        return back();
+      }elseif($request->input("admin-option")==1){
+        Order::where('id','=',$request->input("admin-option-order-id"))->update([
+          "suspended" => 1
+        ]);
+        Session::flash('update_success_admin', '更新しました!');
+        return back();
+      }elseif($request->input("admin-option")==2){
+        Order::with(['BidCompany','Bid'])->where('id','=',$request->input("admin-option-order-id"))->delete();
+        Session::flash('update_success_admin', '更新しました!');
+        return back();
+      }
+      Session::flash('update_success_admin', '間違い!');
+      return back();
+    }
+    public function admin_order_send_option(Request $request){
+      $order_id=$request->input("admin-order-id-send-option");
+      $user_id=$request->input("admin-send-option");
+      if(!count(CompanyViewableOrders::where('order_id','=',$order_id)->where('user_id','=',$user_id)->get())){
+        $new_viewable=new CompanyViewableOrders;
+        $new_viewable->user_id = $user_id;
+        $new_viewable->order_id = $order_id;
+        $new_viewable->save();
+        Session::flash('update_success_admin', '更新しました!');
+        return back();
+      }
+      Session::flash('update_success_admin', 'もう存在している!');
+      return back();
     }
 }

@@ -16,6 +16,7 @@
 </ol>
 <?php if(!isset($my_orders)){?>
 @foreach ($orders as $order)
+<?php if (!in_array($order['id'], $current_allowed_orders)){continue;}?>
 <div class="order-card"> <!-- start order card -->
 <div class="row">
     <div class="half">

@@ -102,6 +102,10 @@ Route::post('delete_record_permanently','admin@delete_record_permanently')->midd
 
 Route::get('admin-message-hist','admin@message_hist')->middleware('admin');
 
+Route::post('admin-order-option','admin@admin_order_option')->middleware('admin');
+
+Route::post('admin-order-send-option','admin@admin_order_send_option')->middleware('admin');
+
 Route::get('set-order-deadline','orders@set_deadline')->middleware('client');
 
 Route::post('delete-account','users@delete_account')->middleware('auth');

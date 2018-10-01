@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Order;
 use App\BidCompany;
 use App\OrderViews;
+use App\CompanyViewableOrders;
 use App\Bid;
 use Auth;
 use DB;
@@ -66,6 +67,7 @@ class orders extends Controller
         Session::flash('active_breadcrumb', 1);
       }
       $orders=Order::with(['BidCompany','Bid'])->where('bid_status','<>',2)->orderBy('id','desc')->paginate(env('ORDERS_PER_PAGE',5));
+      $current_allowed_orders=CompanyViewableOrders::where('user_id','=',Auth::id())->pluck('order_id')->toArray();
       foreach($orders as $order){
         if(!count(OrderViews::where('order_id','=',$order['id'])->where('user_id','=',Auth::id())->get())){
           $newOrderView=new OrderViews;
@@ -74,7 +76,7 @@ class orders extends Controller
           $newOrderView->save();
         }
       }
-      return view('company_order_view_all',compact('orders'));
+      return view('company_order_view_all',compact('orders','current_allowed_orders'));
       //return $orders;
 
     }

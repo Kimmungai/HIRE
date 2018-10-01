@@ -6,38 +6,49 @@
                 <a href="/admin-orders" class="btn btn-default"><i class="glyphicon glyphicon-backward"></i>  戻る</a>
                 <div class="row">
                   <div class="col-lg-10 col-lg-offset-1">
-                    <h3>Order Options</h3>
+                    <h3>注文の選択肢</h3>
+                    <?php if(Session::has('update_success_admin')): ?>
+                    <h4><?php echo e(Session::get('update_success_admin')); ?></h4>
+                    <?php endif; ?>
                     <table class="table table-bordered">
                       <tbody>
+                        <form id="admin-order-option-form" action="<?php echo e(url('/admin-order-option')); ?>" method="POST">
+                          <?php echo e(csrf_field()); ?>
+
+                          <input name="admin-option-order-id" type="hidden" value="<?php echo e($data[0]['id']); ?>" />
                         <tr>
-                            <th>Status</th>
+                            <th>状態</th>
                             <td>
-                              <select class="form-control">
-                                <option>choose one</option>
-                                <option>Approve</option>
-                                <option>Suspend</option>
-                                <option>Delete</option>
+                              <select name="admin-option" class="form-control">
+                                <option <?php if($data[0]['admin_approved']==-1){?>selected<?php }?> value="-1">保留</option>
+                                <option <?php if($data[0]['admin_approved']==0){?>selected<?php }?> value="0">確認済み</option>
+                                <option <?php if($data[0]['admin_approved']==1){?>selected<?php }?> value="1">中断した</option>
+                                <option <?php if($data[0]['admin_approved']==2){?>selected<?php }?> value="2">削除</option>
                               </select>
                           </td>
                           <td>
-                            <button class="btn btn-default">submit</button>
+                            <button type="submit" class="btn btn-default" onclick="update('admin-order-option-form')">確認する</button>
                           </td>
                         </tr>
+                      </form>
+                      <form id="admin-order-send-option-form" action="<?php echo e(url('/admin-order-send-option')); ?>" method="POST">
+                        <?php echo e(csrf_field()); ?>
+
+                        <input name="admin-order-id-send-option" type="hidden" value="<?php echo e($data[0]['id']); ?>" />
                         <tr>
-                            <th>Send to</th>
+                            <th>に送る</th>
                             <td>
-                              <select class="form-control">
-                                <option>choose one</option>
-                                <option>All companies</option>
+                              <select name="admin-send-option" class="form-control">
                                 <?php $__currentLoopData = $all_companies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $company): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                  <option><?php echo e($company->company_name); ?></option>
+                                  <option value="<?php echo e($company->id); ?>"><?php echo e($company->company_name); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                               </select>
                           </td>
                           <td>
-                            <button class="btn btn-default">submit</button>
+                            <button type="submit" class="btn btn-default" onclick="update('admin-order-send-option-form')">確認する</button>
                           </td>
                         </tr>
+                      </form>
                       </tbody>
                     </table>
                   </div>
@@ -154,6 +165,15 @@
             </div>
         </div>
         <!-- /#page-content-wrapper -->
+        <script>
+        function update(id){
+          event.preventDefault();
+          var confirm=window.confirm("この内容で確定してよろしいですか?");
+          if(confirm){
+            $("#"+id).submit();
+          }
+        }
+        </script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.admin-layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

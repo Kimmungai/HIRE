@@ -14,6 +14,7 @@
 </ol>
 <?php if(!isset($my_orders)){?>
 <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php if (!in_array($order['id'], $current_allowed_orders)){continue;}?>
 <div class="order-card"> <!-- start order card -->
 <div class="row">
     <div class="half">
