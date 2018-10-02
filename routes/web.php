@@ -114,6 +114,7 @@ Route::get('admin-message-details/{chat_users_id}','admin@message_details')->mid
 Route::get('chat-messages-duration','admin@chat_messages_duration')->middleware('admin');
 
 Route::get('/chat','users@chat')->middleware('auth');
+Route::get('/housekeeper','admin@housekeeper');
 
 Route::get('admin-client-accounts-details', function () {
     return view('admin.client-accounts-details');

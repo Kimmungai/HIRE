@@ -42,8 +42,8 @@
     <p><strong>希望車種：</strong><span><?php echo e($client_order[0]['car_type']); ?></span></p>
     <p><strong>備考：</strong><?php echo e($client_order[0]['remarks']); ?></p>
     <p><strong>締め切り</strong>
-      <input  id="deadline-date" type="text"/>
-      <input class="btn cancel" type="button" value="セット" onclick="set_deadline()"/>
+      <input  id="deadline-date" type="text" value="<?php echo e($client_order[0]['deadline-date']); ?>"/>
+      <input class="btn cancel" type="button"  value="セット" onclick="set_deadline()"/>
     </p>
     <!--<?php if(Auth::id()==$client_order[0]['user_id']): ?>
     <a href="/cancel_order/<?php echo e($client_order[0]['id']); ?>" class="btn cancel">キャンセルする</a>

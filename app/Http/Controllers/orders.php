@@ -58,7 +58,7 @@ class orders extends Controller
       $new_order ->remarks=session('details');session()->forget('details');
       $new_order ->bid_id=$user_id;
       $new_order->save();
-      $all_user_orders=Order::with(['BidCompany','Bid'])->where('user_id', '=', $user_id)->where('bid_status','<>',2)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',5));
+      $all_user_orders=Order::with(['BidCompany','Bid'])->where('user_id', '=', $user_id)->where('suspended','=',0)->where('bid_status','<>',2)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',5));
       return view('client_order_view_all', compact('all_user_orders'));
     }
     public function all_orders()
@@ -66,7 +66,7 @@ class orders extends Controller
       if(Session::get('active_breadcrumb')!=2 && Session::get('active_breadcrumb')!=3){
         Session::flash('active_breadcrumb', 1);
       }
-      $orders=Order::with(['BidCompany','Bid'])->where('bid_status','<>',2)->orderBy('id','desc')->paginate(env('ORDERS_PER_PAGE',5));
+      $orders=Order::with(['BidCompany','Bid'])->where('suspended','=',0)->where('admin_approved','=',1)->where('bid_status','<>',2)->orderBy('id','desc')->paginate(env('ORDERS_PER_PAGE',5));
       $current_allowed_orders=CompanyViewableOrders::where('user_id','=',Auth::id())->pluck('order_id')->toArray();
       foreach($orders as $order){
         if(!count(OrderViews::where('order_id','=',$order['id'])->where('user_id','=',Auth::id())->get())){
@@ -151,7 +151,7 @@ class orders extends Controller
     public function open_bids()
     {
       Session::flash('active_breadcrumb', 3);
-      $orders=Order::where('bid_status','=',0)->where('bid_status','<>',2)->with(['BidCompany','Bid'])->paginate(env('ORDERS_PER_PAGE',5));
+      $orders=Order::where('bid_status','=',0)->where('suspended','=',0)->where('bid_status','<>',2)->with(['BidCompany','Bid'])->paginate(env('ORDERS_PER_PAGE',5));
       foreach($orders as $order){
         if(!count(OrderViews::where('order_id','=',$order['id'])->where('user_id','=',Auth::id())->get())){
           $newOrderView=new OrderViews;
@@ -164,7 +164,7 @@ class orders extends Controller
     }
     public function my_bids()
     {
-      $my_orders=BidCompany::with(['Order' => function ($query){$query->where('bid_status','<>',2);},'Bid'])->where('user_id','=',Auth::id())->orderBy('id','desc')->paginate(env('ORDERS_PER_PAGE',5));
+      $my_orders=BidCompany::with(['Order' => function ($query){$query->where('bid_status','<>',2)->where('suspended','=',0);},'Bid'])->where('user_id','=',Auth::id())->orderBy('id','desc')->paginate(env('ORDERS_PER_PAGE',5));
       foreach($my_orders as $order){
         if(!count(OrderViews::where('order_id','=',$order['id'])->where('user_id','=',Auth::id())->get())){
           $newOrderView=new OrderViews;
@@ -199,7 +199,7 @@ class orders extends Controller
     public function closed_bids()
     {
       Session::flash('active_breadcrumb', 2);
-      $orders=Order::where('bid_status','=',1)->where('bid_status','<>',2)->with(['BidCompany','Bid'])->paginate(env('ORDERS_PER_PAGE',5));
+      $orders=Order::where('bid_status','=',1)->where('suspended','=',0)->where('bid_status','<>',2)->with(['BidCompany','Bid'])->paginate(env('ORDERS_PER_PAGE',5));
       foreach($orders as $order){
         if(!count(OrderViews::where('order_id','=',$order['id'])->where('user_id','=',Auth::id())->get())){
           $newOrderView=new OrderViews;

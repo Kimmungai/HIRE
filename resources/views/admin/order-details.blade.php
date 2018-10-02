@@ -21,10 +21,10 @@
                             <th>状態</th>
                             <td>
                               <select name="admin-option" class="form-control">
-                                <option <?php if($data[0]['admin_approved']==-1){?>selected<?php }?> value="-1">保留</option>
-                                <option <?php if($data[0]['admin_approved']==0){?>selected<?php }?> value="0">確認済み</option>
-                                <option <?php if($data[0]['admin_approved']==1){?>selected<?php }?> value="1">中断した</option>
-                                <option <?php if($data[0]['admin_approved']==2){?>selected<?php }?> value="2">削除</option>
+                                <option <?php if($data[0]['admin_approved']==0){?>selected<?php }?> value="-1">保留</option>
+                                <option <?php if($data[0]['admin_approved']==1){?>selected<?php }?> value="0">確認済み</option>
+                                <!--<option <?php if($data[0]['suspended']==1){?>selected<?php }?> value="1">中断した</option>
+                                <option <?php if($data[0]['admin_approved']==2){?>selected<?php }?> value="2">削除</option>-->
                               </select>
                           </td>
                           <td>
@@ -111,6 +111,12 @@
                                     <div class="table-message">
                                     {{$data[0]['remarks']}}
                                     </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>締め切り：</th>
+                                <td>
+                                    {{$data[0]['deadline-date']}}
                                 </td>
                             </tr>
                     </tbody>

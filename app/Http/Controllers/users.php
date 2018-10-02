@@ -26,15 +26,15 @@ class users extends Controller
       { if(Auth::check()){
             if(Auth::user()->user_category==0){
               $condition='id';
-              $sign='=';
-              $test=true;
+              $sign='<>';
+              $test='';
             }elseif(Auth::user()->user_category==1){
               $condition='user_id';
               $sign='=';
               $test=Auth::id();
             }
           }
-      $client_data=Order::orderBy('id','Desc')->where('bid_status','=',1)->where($condition,$sign,$test)->paginate(env('ORDERS_PER_PAGE',1));
+      $client_data=Order::orderBy('id','Desc')->where('suspended','=',0)->where('bid_status','=',1)->where('admin_approved','=',1)->where($condition,$sign,$test)->paginate(env('ORDERS_PER_PAGE',1));
       $count=0;
       foreach($client_data as $client_datum)
       {
@@ -52,7 +52,8 @@ class users extends Controller
         }
         else if((Auth::user()->user_category)==0)
         {
-          return view('company-top', compact('client_data','price_agreed','num_companies_bidding','company_name'));//company data
+          $pending_orders=Order::orderBy('id','Desc')->where('suspended','=',0)->where('admin_approved','=',0)->where('bid_status','=',0)->paginate(env('ORDERS_PER_PAGE',1));
+          return view('company-top', compact('client_data','price_agreed','num_companies_bidding','company_name','pending_orders'));//company data
         }
         else if((Auth::user()->user_category)==1)
         {
@@ -80,21 +81,21 @@ class users extends Controller
           Session::flash('active_breadcrumb', 1);
         }
         $user_id = Auth::id();
-        $all_user_orders=Order::with(['BidCompany','Bid'])->where('bid_status','<>',2)->where('user_id','=',$user_id)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
+        $all_user_orders=Order::with(['BidCompany','Bid'])->where('suspended','=',0)->where('bid_status','<>',2)->where('user_id','=',$user_id)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
         return view('client_order_view_all',compact('all_user_orders'));
     }
     public function open_client_bids()
     {
       Session::flash('active_breadcrumb', 3);
       $user_id = Auth::id();
-      $all_user_orders=Order::with(['BidCompany','Bid'])->where('user_id', '=', $user_id)->where('bid_status','=',0)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
+      $all_user_orders=Order::with(['BidCompany','Bid'])->where('suspended','=',0)->where('user_id', '=', $user_id)->where('bid_status','=',0)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
       return view('client_order_view_all',compact('all_user_orders'));
     }
     public function closed_client_bids()
     {
       Session::flash('active_breadcrumb', 2);
       $user_id = Auth::id();
-      $all_user_orders=Order::with(['BidCompany','Bid'])->where('user_id', '=', $user_id)->where('bid_status','=',1)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
+      $all_user_orders=Order::with(['BidCompany','Bid'])->where('suspended','=',0)->where('user_id', '=', $user_id)->where('bid_status','=',1)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',1));
       return view('client_order_view_all',compact('all_user_orders'));
     }
     public function set_pass(Request $request)

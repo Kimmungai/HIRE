@@ -12,7 +12,7 @@
   <h3><?php echo e(Session::get('user_updates_reg_details')); ?></h3>
   <?php endif; ?>
     <h3>登録情報</h3>
-    <form action="/update_reg_details" method="POST">
+    <form id="update_reg_details_form" action="/update_reg_details" method="POST">
       <?php echo e(csrf_field()); ?>
 
     <label>ID：</label>
@@ -33,7 +33,7 @@
     <input name="address" type="text" value="<?php echo e($user_details['address']); ?>" required><br>
     <label>電話番号:</label>
     <input  type="text" value="<?php echo e($user_details['tel']); ?>" required><br>
-        <input type="submit" class="submit" value="保存"  />
+        <input type="submit" class="submit" value="保存"  onclick="confirm_update('update_reg_details_form')"/>
     </form>
     <h3>パスワード変更</h3>
     <h3><?php echo e(Session::get('password_mismatch')); ?></h3>
@@ -41,9 +41,9 @@
       <?php echo e(csrf_field()); ?>
 
     <label>現在パスワード</label>
-    <input name="password" type="password" ><br>
+    <input name="password" type="password" required/><br>
     <label>現在パスワード</label>
-    <input name="password_check" type="password" ><br>
+    <input name="password_check" type="password" required/><br>
      <input type="submit" class="submit" value="パスワード変更" />
     </form>
     <h3>アカウントを削除する</h3>
@@ -63,6 +63,14 @@
     if(confirm){
       //alert("アカウントの削除");
       $("#"+id+"-form").submit();
+    }
+  };
+  function confirm_update(id){
+    event.preventDefault();
+    var confirm=window.confirm("この内容で確定してよろしいですか?");
+    if(confirm){
+      //alert("アカウントの削除");
+      $("#"+id).submit();
     }
   };
 </script>

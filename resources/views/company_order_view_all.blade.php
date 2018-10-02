@@ -16,7 +16,7 @@
 </ol>
 <?php if(!isset($my_orders)){?>
 @foreach ($orders as $order)
-<?php if (!in_array($order['id'], $current_allowed_orders)){continue;}?>
+<?php if (!in_array($order['id'], $current_allowed_orders) || $order['order']['suspended']){continue;}?>
 <div class="order-card"> <!-- start order card -->
 <div class="row">
     <div class="half">
@@ -78,6 +78,7 @@
 @endforeach
 <?php }else{$orders=$my_orders;/*for($count=0;$count<count($orders);$count++){*/?>
   @foreach ($orders as $order)
+  <?php if($order['order']['suspended']==1){continue;}?>
   <div class="order-card"> <!-- start order card -->
   <div class="row">
       <div class="half">
@@ -99,7 +100,7 @@
                   <strong>お迎えの場所:</strong><br>
                   {{$order['order']['pick_up_address']}}
               </p>
-              <p><small>To:</small><br>
+              <p><small>To: </small><br>
                   <strong>お送り先の場所:</strong><br>
                   {{$order['order']['drop_off_address']}}
               </p>

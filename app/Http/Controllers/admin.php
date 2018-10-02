@@ -12,6 +12,10 @@ use Session;
 use App\ChatUsers;
 use App\ChatMessages;
 use Carbon\Carbon;
+use Mail;
+use App\Mail\NewOrder;
+use App\Mail\orderDeadline;
+use App\Mail\orderSuspended;
 
 
 class admin extends Controller
@@ -150,7 +154,7 @@ class admin extends Controller
     }
     public function transactions()
     {
-      $data=Order::where('bid_status','=',1)->paginate(10); //get finalized orders
+      $data=Order::where('bid_status','=',1)->where('suspended','=',0)->paginate(10); //get finalized orders
       $count=0;
       foreach($data as $order)
       {
@@ -291,7 +295,12 @@ class admin extends Controller
     public function admin_order_send_option(Request $request){
       $order_id=$request->input("admin-order-id-send-option");
       $user_id=$request->input("admin-send-option");
+
       if(!count(CompanyViewableOrders::where('order_id','=',$order_id)->where('user_id','=',$user_id)->get())){
+        $company=User::where('id','=',$user_id)->first();
+        $order=Order::where('id','=',$order_id)->first();
+        $email = new NewOrder($company,$order);
+        Mail::to($company->email)->send($email);
         $new_viewable=new CompanyViewableOrders;
         $new_viewable->user_id = $user_id;
         $new_viewable->order_id = $order_id;
@@ -301,5 +310,30 @@ class admin extends Controller
       }
       Session::flash('update_success_admin', 'もう存在している!');
       return back();
+    }
+    public function housekeeper()
+    {
+      $all_orders=Order::where('bid_status','=',0)->where('suspended','=',0)->where('admin_approved','=',1)->where('bid_status','<>',2)->get();
+      foreach($all_orders as $order){
+        $dt = Carbon::now();
+        $deadline=Carbon::createFromTimeStamp(strtotime($order['deadline-date']));
+        $days=$dt->diffInDays($deadline);
+        if($days <= env('DAYS_BEFORE_DEADLINE_TO_NOTIFY',2)){
+          $user=User::where('id','=',$order['user_id'])->first();
+          $email = new orderDeadline($user,$order);
+          Mail::to($user->email)->send($email);
+        }elseif($days > env('DAYS_BEFORE_DEADLINE_TO_NOTIFY',2)){
+          $user=User::where('id','=',$order['user_id'])->first();
+          $email = new orderSuspended($user,$order);
+          Mail::to($user->email)->send($email);
+          Order::where('id','=',$order['id'])->update([
+            "suspended" => 1
+          ]);
+        }
+        return '';
+      }
+      Order::where('id','=',1)->update([
+        "order_name" => "cron fanyaring job"
+      ]);
     }
 }

@@ -14,7 +14,7 @@
 </ol>
 <?php if(!isset($my_orders)){?>
 <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-<?php if (!in_array($order['id'], $current_allowed_orders)){continue;}?>
+<?php if (!in_array($order['id'], $current_allowed_orders) || $order['order']['suspended']){continue;}?>
 <div class="order-card"> <!-- start order card -->
 <div class="row">
     <div class="half">
@@ -80,6 +80,7 @@
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php }else{$orders=$my_orders;/*for($count=0;$count<count($orders);$count++){*/?>
   <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+  <?php if($order['order']['suspended']==1){continue;}?>
   <div class="order-card"> <!-- start order card -->
   <div class="row">
       <div class="half">
@@ -102,7 +103,7 @@
                   <?php echo e($order['order']['pick_up_address']); ?>
 
               </p>
-              <p><small>To:</small><br>
+              <p><small>To: </small><br>
                   <strong>お送り先の場所:</strong><br>
                   <?php echo e($order['order']['drop_off_address']); ?>
 

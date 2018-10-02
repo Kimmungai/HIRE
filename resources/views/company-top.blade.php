@@ -12,6 +12,37 @@
     <li><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>サービス流れ</a></li>-->
 </ul>
 <!-- last 3 orders this company bid on -->
+@if(count($pending_orders))
+<h3>保留中の注文</h3>
+<?php $count=0;?>
+<div class="all-orders">
+@foreach($pending_orders as $client_datum)
+  <?php if($count==3){break;}?>
+    <div class="bid-card">
+        <div class="part">
+            <small>日付:</small>
+            <p>{{$client_datum['created_at']->format('d/m/Y')}}</p>
+        </div>
+        <div class="part">
+            <small>依頼名:</small>
+            <p>{{$client_datum['order_name']}}</p>
+        </div>
+
+
+        <div class="part">
+            <small>状態:</small>
+            @if($client_datum['bid_status'])
+              <p>確認済み</p>
+            @else
+              <p>保留</p>
+            @endif
+        </div>
+    </div>
+    <?php $count++;?>
+  @endforeach
+</div>
+<hr>
+@endif
 <h3>最新提供履歴</h3>
 <div class="all-orders">
   <?php $count=0;?>

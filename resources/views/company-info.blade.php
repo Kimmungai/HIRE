@@ -13,7 +13,7 @@
   <h3>{{ Session::get('user_updates_reg_details') }}</h3>
   @endif
     <h3>登録情報</h3>
-    <form action="/update_reg_details" method="POST">
+    <form id="update_reg_details_form" action="/update_reg_details" method="POST">
       {{csrf_field()}}
     <label>ID：</label>
     <p>user{{$user_details['id']}}</p><br>
@@ -33,17 +33,23 @@
     <input name="address" type="text" value="{{$user_details['address']}}" required><br>
     <label>電話番号:</label>
     <input  type="text" value="{{$user_details['tel']}}" required><br>
-        <input type="submit" class="submit" value="保存"  />
+        <input type="submit" class="submit" value="保存"  onclick="confirm_update('update_reg_details_form')"/>
     </form>
     <h3>パスワード変更</h3>
     <h3>{{ Session::get('password_mismatch') }}</h3>
     <form action="/set_pass" method="POST">
       {{csrf_field()}}
     <label>現在パスワード</label>
-    <input name="password" type="password" ><br>
+    <input name="password" type="password" required/><br>
+    @if($errors->has('password'))
+    <p class="validation-errors">{{ $errors->first('password') }}</p>
+    @endif
     <label>現在パスワード</label>
     <input name="password_check" type="password" ><br>
-     <input type="submit" class="submit" value="パスワード変更" />
+     <input type="submit" class="submit" value="パスワード変更" required/>
+     @if($errors->has('password_check'))
+     <p class="validation-errors">{{ $errors->first('password_check') }}</p>
+     @endif
     </form>
     <h3>アカウントを削除する</h3>
     <form id="delete-account-form" action="/delete-account" method="POST">
@@ -56,6 +62,14 @@
 </div>
 <script>
   function account_delete(id){
+    event.preventDefault();
+    var confirm=window.confirm("この内容で確定してよろしいですか?");
+    if(confirm){
+      //alert("アカウントの削除");
+      $("#"+id+"-form").submit();
+    }
+  };
+  function confirm_update(id){
     event.preventDefault();
     var confirm=window.confirm("この内容で確定してよろしいですか?");
     if(confirm){
