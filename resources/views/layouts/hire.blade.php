@@ -299,13 +299,13 @@ function back_company_list(){
   </script>
   <script>
     $( function() {
-      $( "#start_date" ).datepicker();
+      $( "#start_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
       $( "#start_time" ).timepicker();
 
-      $( "#end_date" ).datepicker();
+      $( "#end_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
       $( "#end_time" ).timepicker();
 
-      $( "#deadline-date" ).datepicker();
+      $( "#deadline-date" ).datepicker({ dateFormat: 'yy-mm-dd' });
     } );
     </script>
 </body>

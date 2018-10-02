@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="{{url('/css/simple-sidebar.css')}}">
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="{{url('/js/bootstrap.min.js')}}"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -58,6 +60,8 @@
         </form>
     </div>
     <!-- /#wrapper -->
+    <script src="{{url('js/jquery-ui.min.js')}}"></script>
+    <script src="{{url('js/jquery.timepicker.min.js')}}"></script>
     <script src="/js/main.js"></script>
 
     <!-- Menu Toggle Script -->
@@ -71,6 +75,17 @@
       $('#logout-form').submit();
     }
     </script>
+    <script>
+      $( function() {
+        $( "#pick_up_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
+        $( "#pick_up_time" ).timepicker();
+
+        $( "#drop_off_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
+        $( "#drop_off_time" ).timepicker();
+
+        $( "#deadline-date" ).datepicker({ dateFormat: 'yy-mm-dd' });
+      } );
+      </script>
 </body>
 
 </html>

@@ -113,6 +113,9 @@ Route::post('delete-account','users@delete_account')->middleware('auth');
 Route::get('admin-message-details/{chat_users_id}','admin@message_details')->middleware('admin');
 Route::get('chat-messages-duration','admin@chat_messages_duration')->middleware('admin');
 
+Route::post('admin-update-order','admin@admin_update_order')->middleware('admin');
+Route::get('admin-delete-order/{order_id}','admin@admin_delete_order')->middleware('admin');
+
 Route::get('/chat','users@chat')->middleware('auth');
 Route::get('/housekeeper','admin@housekeeper');
 

@@ -19,10 +19,10 @@
                         </select>-->
                       </div>
                       <div class="half">
-                        <div class="account-box <?php if(old('cars') != ''){if(old('cars')=="0"){?>fill-color<?php }}else{?> fill-color<?php }?>" id="company-Acc" onclick="select_account(this.id)">ハイヤー会社 <input id="check-company-Acc" name="cars" type="radio" class="hidden" value="0" checked /></div>
+                        <div class="account-box <?php if(old('cars') != ''){if(old('cars')=="0"){?>fill-color<?php }}else{?> fill-color<?php }?>" id="company-Acc" onclick="select_account(this.id)">ハイヤー会社 <input id="check-company-Acc" name="cars" type="radio" class="hidden" value="0" <?php if(old('cars') != ''){if(old('cars')=="0"){?>checked<?php }}else{?> checked<?php }?>/></div>
                       </div>
                       <div class="half">
-                        <div class="account-box <?php if(old('cars') != ''){if(old('cars')=="1"){?>fill-color<?php }}?>" id="user-Acc" onclick="select_account(this.id)">利用者 <input id="check-user-Acc" name="cars" type="radio" class="hidden" value="1" /></div>
+                        <div class="account-box <?php if(old('cars') != ''){if(old('cars')=="1"){?>fill-color<?php }}?>" id="user-Acc" onclick="select_account(this.id)">利用者 <input id="check-user-Acc" name="cars" type="radio" class="hidden" value="1"  <?php if(old('cars') != ''){if(old('cars')=="1"){?>checked<?php }}?>/></div>
                       </div>
                           <!-- Company name -->
                       <div class="full" ng-class="{
@@ -40,7 +40,7 @@
           				入力必須項目です。
           			    </p>
                     @if($errors->has('hire_comp'))
-                    <p class="validation-errors">{{ $errors->first('hire_comp') }}</p>
+                    <p class="validation-errors has-error">{{ $errors->first('hire_comp') }}</p>
                     @endif
           			    <p ng-show="formRegister.hire_comp.$error.pattern && (!formRegister.hire_comp.$pristine || formRegister.$submitted)">
           				企業名は文字、数字とハイフンのみご入力ください。
@@ -62,7 +62,7 @@
           				入力必須項目です。
           			    </p>
                     @if($errors->has('hire_comp_fu'))
-                    <p class="validation-errors">{{ $errors->first('hire_comp_fu') }}</p>
+                    <p class="validation-errors has-error">{{ $errors->first('hire_comp_fu') }}</p>
                     @endif
           			    <p ng-show="formRegister.hire_comp_fu.$error.pattern && (!formRegister.hire_comp_fu.$pristine || formRegister.$submitted)">
           				全角のカタカナのみご入力ください。
@@ -91,7 +91,7 @@
           				お名前は文字のみご入力ください。
           			    </p>
                     @if($errors->has('hire_last_name'))
-                    <p class="validation-errors">{{ $errors->first('hire_last_name') }}</p>
+                    <p class="validation-errors has-error">{{ $errors->first('hire_last_name') }}</p>
                     @endif
                       </div>
                       <!-- First name of the person in charge -->
@@ -113,7 +113,7 @@
           				お名前は文字のみご入力ください。
           			    </p>
                     @if($errors->has('hire_first_name'))
-                    <p class="validation-errors">{{ $errors->first('hire_first_name') }}</p>
+                    <p class="validation-errors has-error">{{ $errors->first('hire_first_name') }}</p>
                     @endif
                       </div>
                       <!-- Reading of the name of person in charge -->
@@ -139,7 +139,7 @@
           				全角カタカナのみご入力ください。
           			    </p>
                     @if($errors->has('hire_last_name_fu'))
-                    <p class="validation-errors">{{ $errors->first('hire_last_name_fu') }}</p>
+                    <p class="validation-errors has-error">{{ $errors->first('hire_last_name_fu') }}</p>
                     @endif
                       </div>
                           <!-- Reading of the first name -->
@@ -160,7 +160,7 @@
           				全角カタカナのみご入力ください。
           			    </p>
                     @if($errors->has('hire_first_name_fu'))
-                    <p class="validation-errors">{{ $errors->first('hire_first_name_fu') }}</p>
+                    <p class="validation-errors has-error">{{ $errors->first('hire_first_name_fu') }}</p>
                     @endif
                       </div>
                       <!-- zip code -->
@@ -181,7 +181,7 @@
               住所は文字、数字とハイフンのみご入力ください。
                 </p>
                 @if($errors->has('zip'))
-                <p class="validation-errors">{{ $errors->first('zip') }}</p>
+                <p class="validation-errors has-error">{{ $errors->first('zip') }}</p>
                 @endif
                   </div>
                           <!-- Address -->
@@ -199,7 +199,7 @@
           				入力必須項目です。
           			    </p>
                     @if($errors->has('hire_address'))
-                    <p class="validation-errors">{{ $errors->first('hire_address') }}</p>
+                    <p class="validation-errors has-error">{{ $errors->first('hire_address') }}</p>
                     @endif
           			    <p ng-show="formRegister.hire_address.$error.pattern && (!formRegister.hire_address.$pristine || formRegister.$submitted)">
           				住所は文字、数字とハイフンのみご入力ください。
@@ -218,7 +218,7 @@
           				入力必須項目です。
           			    </p>
                     @if($errors->has('hire_tel'))
-                    <p class="validation-errors">{{ $errors->first('hire_tel') }}</p>
+                    <p class="validation-errors has-error">{{ $errors->first('hire_tel') }}</p>
                     @endif
           			    <p ng-show="formRegister.hire_tel.$error.pattern && (!formRegister.hire_tel.$pristine || formRegister.$submitted)">
           				電話番号は数字とハイフンのみご入力ください。
@@ -237,7 +237,7 @@
           				入力必須項目です。
                 </p>
                   @if($errors->has('email'))
-                  <p class="validation-errors">{{ $errors->first('email') }}</p>
+                  <p class="validation-errors has-error">{{ $errors->first('email') }}</p>
                   @endif
           			    <p ng-show="formRegister.email.$error.email && (!formRegister.email.$pristine || formRegister.$submitted)">
           				正しいメールアドレスご入力ください。
@@ -257,7 +257,7 @@
           				入力必須項目です。
           			    </p>
                     @if($errors->has('hire_email_check'))
-                    <p class="validation-errors">{{ $errors->first('hire_email_check') }}</p>
+                    <p class="validation-errors has-error">{{ $errors->first('hire_email_check') }}</p>
                     @endif
           			    <p ng-show="formRegister.hire_email_check.$error.pattern && (!formRegister.hire_email_check.$pristine || formRegister.$submitted)">
           				上記と同じメールアドレスご入力ください。

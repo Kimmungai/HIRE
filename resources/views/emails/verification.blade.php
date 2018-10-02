@@ -84,7 +84,7 @@ $style = [
                                     <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
                                         <!-- Greeting -->
                                         <h1 style="{{ $style['header-1'] }}">
-                                            ご登録誠にありがとうございます。{{ $user->first_name }}{{ $user->last_name }}様ご登録ありがとうございます。
+                                            {{ $user->first_name }}{{ $user->last_name }}様ご登録ありがとうございます。
                                         </h1>
 
                                         <!-- Intro -->

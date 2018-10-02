@@ -196,7 +196,7 @@ class users extends Controller
             'hire_address' => 'required',
             'hire_tel' => 'required|numeric',
             'email' => 'required|email|unique:users',
-            'hire_email_check' => 'required|email|same:email',
+            'hire_email_check' => 'required|email',
           ];
         }
         else{
@@ -211,7 +211,7 @@ class users extends Controller
               'hire_address' => 'required',
               'hire_tel' => 'required|numeric',
               'email' => 'required|email|unique:users',
-              'hire_email_check' => 'required|email|same:email',
+              'hire_email_check' => 'required|email',
             ];
           }
         $this->validate($request, $validatedData);
@@ -302,6 +302,8 @@ class users extends Controller
         $client_data[2]=$unread_messages;
         $client_data[3]=User::where('id','=',$client_id['client_id'])->value('online_status');
         $client_data[4]=$login_time_secs;
+        $client_data[5]=User::where('id','=',$client_id['client_id'])->value('first_name');
+        $client_data[6]=User::where('id','=',$client_id['client_id'])->value('last_name');
         $client_names[$count]=$client_data;
         $count++;
       }

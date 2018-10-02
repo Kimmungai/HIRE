@@ -108,7 +108,7 @@
     var excia_commission_payable=excia_commission * input_price;
     var consumption_tax_payable=consumption_tax_rate * input_price;
     var final_amount=input_price -(consumption_tax_payable + excia_commission_payable);
-    $('.youget').html('提示料金：'+final_amount.toLocaleString()+'円');
+    $('.youget').html('入金額：'+final_amount.toLocaleString()+'円');
     $('.handling').html('+ 手数料({{$excia_commission_percent}})：'+excia_commission_payable.toLocaleString()+'円');
     $('.tax').html('+ 消費税({{$tax_percent}})：'+consumption_tax_payable.toLocaleString()+'円');
   }

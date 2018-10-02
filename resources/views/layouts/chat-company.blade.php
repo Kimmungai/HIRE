@@ -168,7 +168,7 @@
               //var current_unread=$('#unread'+data[count][1]).text();
               //$('#company-list').append(list_item);
               if($('#chatting_company').val() == data[count][1]){active_status="active_chat";}else{active_status="";}
-              var selected_chat_company='<div class="chat_list " id="item-'+data[count][1]+'" onclick="open_company_chats('+data[count][1]+',\''+data[count][0]+'\','+online_status+')"> <div class="chat_people"> <div class="chat_img"> <img src="{{url("/img/user-icon.png")}}" > </div><div class="chat_ib"> <h5>'+data[count][0]+' <span id="new-msg-'+data[count][1]+'" class="badge unread">'+unread+'</span></h5> </div></div></div>';
+              var selected_chat_company='<div class="chat_list " id="item-'+data[count][1]+'" onclick="open_company_chats('+data[count][1]+',\''+data[count][0]+'\','+online_status+')"> <div class="chat_people"> <div class="chat_img"> <img src="{{url("/img/user-icon.png")}}" > </div><div class="chat_ib"> <h5>'+data[count][0]+' <span id="new-msg-'+data[count][1]+'" class="badge unread">'+unread+'</span></h5> <p>'+data[count][5]+' '+data[count][6]+'</p></div></div></div>';
               if($('#item-'+data[count][1]).length==0)
               {
                 $('#selected-chat-companies').append(selected_chat_company);

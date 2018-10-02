@@ -318,11 +318,11 @@ class admin extends Controller
         $dt = Carbon::now();
         $deadline=Carbon::createFromTimeStamp(strtotime($order['deadline-date']));
         $days=$dt->diffInDays($deadline);
-        if($days <= env('DAYS_BEFORE_DEADLINE_TO_NOTIFY',2)){
+        if($days < env('DAYS_BEFORE_DEADLINE_TO_NOTIFY',2)){
           $user=User::where('id','=',$order['user_id'])->first();
           $email = new orderDeadline($user,$order);
           Mail::to($user->email)->send($email);
-        }elseif($days > env('DAYS_BEFORE_DEADLINE_TO_NOTIFY',2)){
+        }elseif($days == env('DAYS_BEFORE_DEADLINE_TO_NOTIFY',2)){
           $user=User::where('id','=',$order['user_id'])->first();
           $email = new orderSuspended($user,$order);
           Mail::to($user->email)->send($email);
@@ -330,10 +330,35 @@ class admin extends Controller
             "suspended" => 1
           ]);
         }
-        return '';
       }
-      Order::where('id','=',1)->update([
-        "order_name" => "cron fanyaring job"
-      ]);
+      return '';
+    }
+    public function admin_update_order(Request $request){
+      if(Order::where('id','=',$request->input('order_id'))->update([
+        "bid_status" => $request->input('bid_status'),
+        "pick_up_date" => $request->input('pick_up_date'),
+        "pick_up_time" => $request->input('pick_up_time'),
+        "pick_up_address" => $request->input('pick_up_address'),
+        "journey" => $request->input('journey'),
+        "drop_off_date" => $request->input('drop_off_date'),
+        "drop_off_time" => $request->input('drop_off_time'),
+        "drop_off_address" => $request->input('drop_off_address'),
+        "num_of_cars" => $request->input('num_of_cars'),
+        "number_of_people" => $request->input('number_of_people'),
+        "luggage_num" => $request->input('luggage_num'),
+        "car_type" => $request->input('car_type'),
+        "remarks" => $request->input('remarks'),
+        "deadline-date" => $request->input('deadline-date')
+      ])){
+        Session::flash('update_success_admin', '更新しました!');
+      }else{
+        Session::flash('update_success_admin', '間違い!');
+      }
+
+      return back();
+    }
+    public function admin_delete_order($order_id){
+      Order::with(['BidCompany','Bid'])->where('id','=',$order_id)->delete();
+      return redirect('/admin-orders');
     }
 }

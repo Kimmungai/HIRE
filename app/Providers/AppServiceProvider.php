@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
             $allowed_orders=count(CompanyViewableOrders::where('user_id','=',auth()->id())->get());
             //$all_orders=count(Order::where('bid_status','<>',2)->get());
             $all_viewed_orders=count(OrderViews::where('user_id','=',auth()->id())->get());
-            $num_orders=$allowed_orders-$all_viewed_orders;
+            $num_orders=$allowed_orders-$all_viewed_orders;if($num_orders < 0){$num_orders=0;}
             $view->with('num_orders', $num_orders);
         });
     }
