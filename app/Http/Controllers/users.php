@@ -10,11 +10,15 @@ use App\BidCompany;
 use App\Bid;
 use App\ChatUsers;
 use App\ChatMessages;
+use App\OrderViews;
+use App\CompanyViewableOrders;
 use Auth;
 use App\Mail\EmailVerification;
 use App\Mail\AccountDeleted;
 use App\Mail\clientChat;
 use App\Mail\companyChat;
+use App\Mail\BidAccepted;
+use App\Mail\OrderConfirmed;
 use Mail;
 use Session;
 use DB;
@@ -146,6 +150,7 @@ class users extends Controller
     public function choose_company(Request $request)
     {
       Order::where('id','=',$request->input('order'))->update(['bid_status' => 1]);
+      $order=Order::where('id','=',$request->input('order'))->first();
       $bid=Bid::where('id','=',$request->input('bid'))->get();
       BidCompany::where('id','=',$bid[0]['bid_company_id'])->update([
         'price_agreed'=>$bid[0]['price']
@@ -162,11 +167,15 @@ class users extends Controller
         $createChatUsers->company_id=$company_id;
         $createChatUsers->save();
       }
-      $client_message='Your order has been closed';
-      $company_message='You have been chosen!';
-      mail($client_email,'Order Confirmed',$client_message);/*use mail template*/
-      mail($company_email,'Bid Accepted',$company_message);/*use mail template*/
-
+      //$client_message='Your order has been closed';
+      //$company_message='You have been chosen!';
+      //mail($client_email,'Order Confirmed',$client_message);/*use mail template*/
+      $order_confirmed_email = new OrderConfirmed($order);
+      Mail::to($client_email)->send($order_confirmed_email);
+      //mail($company_email,'Bid Accepted',$company_message);/*use mail template*/
+      $company=User::where('id','=',$company_id)->first();
+      $bid_accepted_email = new BidAccepted($order,$company);
+      Mail::to($company_email)->send($bid_accepted_email);
       return back();
     }
     public function select_chat_company()
@@ -270,6 +279,8 @@ class users extends Controller
         $company_data[2]=$unread_messages;
         $company_data[3]=User::where('id','=',$company_id['client_id'])->value('online_status');
         $company_data[4]=$login_time_secs;
+        $company_data[5]=User::where('id','=',$company_id['company_id'])->value('first_name');
+        $company_data[6]=User::where('id','=',$company_id['company_id'])->value('last_name');
         $company_names[$count]=$company_data;
         $count++;
       }
@@ -353,7 +364,7 @@ class users extends Controller
         $company_id=Auth::id();
         $client=User::where('id','=',$client_id)->first();
         $email=User::where('id','=',$company_id)->value('email');
-        mail($email,'send message test',$_GET['message']);
+        //mail($email,'send message test',$_GET['message']);
         //$email = new clientChat($client,$_GET['message']);
         //Mail::to($client->email)->send($email);
       }
@@ -362,7 +373,7 @@ class users extends Controller
         $client_id=Auth::id();
         $company_id=$_GET['id'];
         $email=User::where('id','=',$company_id)->value('email');
-        mail($email,'send message test',$_GET['message']);
+        //mail($email,'send message test',$_GET['message']);
       }
       $chat_users_id=ChatUsers::where('client_id','=',$client_id)->where('company_id','=',$company_id)->value('id');
       $message_data=$_GET['message'];
@@ -418,7 +429,22 @@ class users extends Controller
     {
       $email = new AccountDeleted(Auth::user());
       Mail::to(env('ADMIN','admin@hiremitsumori.com'))->send($email);
-      Order::where('user_id','=',Auth::id())->with(['BidCompany','Bid'])->delete();
+      $user_orders=Order::where('user_id','=',Auth::id())->get();
+      foreach($user_orders as $order){
+        $bid_companies=BidCompany::where('order_id','=',$order['id'])->get();
+        foreach($bid_companies as $bid_company){
+          Bid::where('bid_company_id','=',$bid_company['id'])->delete();
+        }
+        BidCompany::where('order_id','=',$order['id'])->delete();
+        CompanyViewableOrders::where('order_id','=',$order['id'])->delete();
+        OrderViews::where('order_id','=',$order['id'])->delete();
+        Order::where('id','=',$order['id'])->delete();
+      }
+      $user_chats=ChatUsers::where('client_id','=',Auth::id())->get();
+      foreach($user_chats as $user_chat){
+        ChatMessages::where('chat_users_id','=',$user_chat['id'])->delete();
+      }
+      ChatUsers::where('client_id','=',Auth::id())->delete();
       Auth::user()->delete();
       return redirect ('/');
     }

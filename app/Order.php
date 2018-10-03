@@ -24,6 +24,9 @@ class Order extends Model
     {
       return $this->hasMany('App\CompanyViewableOrders');
     }
+    public function OrderViews(){
+      return $this->hasMany('App\OrderViews');
+    }
 
 
 }

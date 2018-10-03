@@ -21,7 +21,7 @@
     <h3><i class="fa fa-user" aria-hidden="true"></i> {{$user_name}} ({{count($num_orders)}}) <!-- number of orders --></h3> <div class="chat"></div>
 </div>
 <div class="order-details">
-    <span class="date">{{$orders[0]['created_at']->format('m/d/Y')}}</span>
+    <span class="date">{{$orders[0]['created_at']->format('Y/m/d')}}</span>
     <span class="order-no">注文番号：BND{{$orders[0]['id']}}</span>
     <p><strong>注文名：</strong><span>{{$orders[0]['order_name']}}</span></p>
     <div class="card-row">
@@ -78,7 +78,7 @@
     <div class="bid-card hire">
         <div class="part">
             <small>日付:</small>
-            <p>{{$bid['created_at']}}</p>
+            <p>{{$bid['created_at']->format('Y/m/d')}}</p>
         </div>
         <div class="part">
             <small>ハイヤー会社:</small>

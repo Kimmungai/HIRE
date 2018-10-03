@@ -20,7 +20,7 @@
      <div class="bid-card">
          <div class="part">
              <small>日付:</small>
-             <p>{{$client_datum['created_at']->format('d/m/Y')}}</p>
+             <p>{{$client_datum['created_at']->format('Y/m/d')}}</p>
          </div>
          <div class="part">
              <small>依頼名:</small>

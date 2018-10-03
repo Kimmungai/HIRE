@@ -10,7 +10,7 @@
     <li class="current"><a href="#">注文内容</a></li>
 </ol>
 <div class="order-details">
-    <span class="date">{{$client_order[0]['created_at']->format('d/m/Y')}}</span><!-- time format can be included by removing the format() -->
+    <span class="date">{{$client_order[0]['created_at']->format('Y/m/d')}}</span><!-- time format can be included by removing the format() -->
     <span class="order-no">注文番号：BND{{$client_order[0]['id']}}</span>
     <p><strong>注文名：</strong><span>{{$client_order[0]['order_name']}}</span></p>
     <p><span>{{ Session::get('order_closed') }}</span></p>
@@ -61,7 +61,7 @@
         </div>
         <div class="part">
             <small>日付:</small>
-            <p>{{$bid['created_at']->format('d/m/Y')}}</p>
+            <p>{{$bid['created_at']->format('Y/m/d')}}</p>
         </div>
         <div class="part">
             <small>ハイヤー会社:</small>

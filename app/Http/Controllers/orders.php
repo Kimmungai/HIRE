@@ -59,7 +59,8 @@ class orders extends Controller
       $new_order ->bid_id=$user_id;
       $new_order->save();
       $all_user_orders=Order::with(['BidCompany','Bid'])->where('user_id', '=', $user_id)->where('suspended','=',0)->where('bid_status','<>',2)->orderBy('id','Desc')->paginate(env('ORDERS_PER_PAGE',5));
-      return view('client_order_view_all', compact('all_user_orders'));
+      //return view('client_order_view_all', compact('all_user_orders'));
+      return redirect('/client_order_view_all');
     }
     public function all_orders()
     {

@@ -7,6 +7,7 @@ use App\User;
 use App\Order;
 use App\BidCompany;
 use App\CompanyViewableOrders;
+use App\OrderViews;
 use App\Bid;
 use Session;
 use App\ChatUsers;
@@ -358,7 +359,15 @@ class admin extends Controller
       return back();
     }
     public function admin_delete_order($order_id){
-      Order::with(['BidCompany','Bid'])->where('id','=',$order_id)->delete();
+      $order=Order::where('id','=',$order_id)->first();
+      $bid_companies=BidCompany::where('order_id','=',$order['id'])->get();
+      foreach($bid_companies as $bid_company){
+        Bid::where('bid_company_id','=',$bid_company['id'])->delete();
+      }
+      BidCompany::where('order_id','=',$order['id'])->delete();
+      CompanyViewableOrders::where('order_id','=',$order['id'])->delete();
+      OrderViews::where('order_id','=',$order['id'])->delete();
+      Order::where('id','=',$order_id)->delete();
       return redirect('/admin-orders');
     }
 }

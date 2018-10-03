@@ -18,7 +18,7 @@
                           {{csrf_field()}}
                           <input name="admin-option-order-id" type="hidden" value="{{$data[0]['id']}}" />
                         <tr>
-                            <th>Admin Approved</th>
+                            <th>承認する</th>
                             <td>
                               <select name="admin-option" class="form-control">
                                 <option <?php if($data[0]['admin_approved']==0){?>selected<?php }?> value="-1">保留</option>

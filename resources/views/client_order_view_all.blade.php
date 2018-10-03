@@ -19,7 +19,7 @@
     <div class="bid-card">
         <div class="part">
             <small>日付:</small>
-            <p>{{$user_order['created_at']->format('d/m/Y')}}</p><!-- time formating can be changed to all values by deleting format('d/m/Y')-->
+            <p>{{$user_order['created_at']->format('Y/m/d')}}</p><!-- time formating can be changed to all values by deleting format('Y/m/d')-->
         </div>
         <div class="part">
             <small>依頼名:</small>
