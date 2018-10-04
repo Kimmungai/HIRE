@@ -318,6 +318,7 @@ class admin extends Controller
       foreach($all_orders as $order){
         $dt = Carbon::now();
         $deadline=Carbon::createFromTimeStamp(strtotime($order['deadline-date']));
+        if($deadline==''){return '';}
         $days=$dt->diffInDays($deadline);
         if($days < env('DAYS_BEFORE_DEADLINE_TO_NOTIFY',2)){
           $user=User::where('id','=',$order['user_id'])->first();

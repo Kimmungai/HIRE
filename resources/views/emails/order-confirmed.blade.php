@@ -108,7 +108,7 @@ $style = [
                                         <!-- Intro -->
 
                                             <p style="{{ $style['paragraph'] }}">
-                                                Click on the button below to bid.
+                                                Click on the button below to view order.
                                             </p>
 
 
