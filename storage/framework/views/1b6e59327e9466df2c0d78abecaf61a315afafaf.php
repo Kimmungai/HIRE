@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/css/bootstrap.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(url('/css/main.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(url('/css/new.css')); ?>">
 

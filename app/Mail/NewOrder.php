@@ -33,6 +33,6 @@ class NewOrder extends Mailable
     {
         $company=$this->company;
         $order=$this->order;
-        return $this->view('emails.new-order',compact('company','order'));
+        return $this->from('info@ths.com', '東京ハイヤークラブ')->subject('【新しい注文依頼があります】')->view('emails.new-order',compact('company','order'));
     }
 }

@@ -18,11 +18,13 @@
                           <option value="1">利用者</option>
                         </select>-->
                       </div>
+
                       <div class="half">
-                        <div class="account-box <?php if(old('cars') != ''){if(old('cars')=="0"){?>fill-color<?php }}else{?> fill-color<?php }?>" id="company-Acc" onclick="select_account(this.id)">ハイヤー会社 <input id="check-company-Acc" name="cars" type="radio" class="hidden" value="0" <?php if(old('cars') != ''){if(old('cars')=="0"){?>checked<?php }}else{?> checked<?php }?>/></div>
+                        <div class="account-box <?php if(old('cars') != ''){if(old('cars')=="1"){?>fill-color<?php }}else{?> fill-color<?php }?>" id="user-Acc" onclick="select_account(this.id)">利用者 <input id="check-user-Acc" name="cars" type="radio" class="hidden" value="1"  <?php if(old('cars') != ''){if(old('cars')=="1"){?>checked<?php }}else{?> checked<?php }?>/></div>
                       </div>
+
                       <div class="half">
-                        <div class="account-box <?php if(old('cars') != ''){if(old('cars')=="1"){?>fill-color<?php }}?>" id="user-Acc" onclick="select_account(this.id)">利用者 <input id="check-user-Acc" name="cars" type="radio" class="hidden" value="1"  <?php if(old('cars') != ''){if(old('cars')=="1"){?>checked<?php }}?>/></div>
+                        <div class="account-box <?php if(old('cars') != ''){if(old('cars')=="0"){?>fill-color<?php }}?>" id="company-Acc" onclick="select_account(this.id)">ハイヤー会社 <input id="check-company-Acc" name="cars" type="radio" class="hidden" value="0" <?php if(old('cars') != ''){if(old('cars')=="0"){?>checked<?php }}?>/></div>
                       </div>
                           <!-- Company name -->
                       <div class="full" ng-class="{

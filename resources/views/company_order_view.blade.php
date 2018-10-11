@@ -18,7 +18,7 @@
     <li class="current"><a href="#">注文内容</a></li>
 </ol>
 <div class="client-details">
-    <h3><i class="fa fa-user" aria-hidden="true"></i> {{$user_name}} ({{count($num_orders)}}) <!-- number of orders --></h3> <div class="chat"></div>
+    <h3><i class="fa fa-user" aria-hidden="true"></i> {{$user_name}} <!-- number of orders --></h3> <div class="chat"></div>
 </div>
 <div class="order-details">
     <span class="date">{{$orders[0]['created_at']->format('Y/m/d')}}</span>

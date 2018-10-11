@@ -35,6 +35,6 @@ class orderDeadline extends Mailable
     {
         $user=$this->user;
         $order=$this->order;
-        return $this->view('emails.order-deadline',compact('user','order'));
+        return $this->from('info@ths.com', '東京ハイヤークラブ')->view('emails.order-deadline',compact('user','order'));
     }
 }

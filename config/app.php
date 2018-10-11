@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Tokyo Hire Services',
+    'name' => env('APP_NAME', '東京ハイヤークラブ'),
 
     /*
     |--------------------------------------------------------------------------

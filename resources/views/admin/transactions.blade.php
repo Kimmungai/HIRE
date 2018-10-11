@@ -28,15 +28,17 @@
                             </tr>
                             <?php $count=0;?>
                             @foreach($data as $datum)
-                            <tr>
-                                <td>{{$datum['created_at']->format('d/m/Y')}}</td>
-                                <td>DFK{{$datum['id']}}</td>
-                                <td>{{$client_name[$count]}}</td>
-                                <td>{{$client_email[$count]}}</td>
-                                <td>{{$seller_name[$count]}}</td>
-                                <td>{{$seller_email[$count]}}</td>
-                                <td><a href="/admin-transactions-details/{{$datum['id']}}" class="btn btn-default btn-block btn-sm">内容確認</a></td>
-                            </tr>
+                              @if($client_email[$count] !='' && $seller_name[$count]!='')
+                              <tr>
+                                  <td>{{$datum['created_at']->format('d/m/Y')}}</td>
+                                  <td>DFK{{$datum['id']}}</td>
+                                  <td>{{$client_name[$count]}}</td>
+                                  <td>{{$client_email[$count]}}</td>
+                                  <td>{{$seller_name[$count]}}</td>
+                                  <td>{{$seller_email[$count]}}</td>
+                                  <td><a href="/admin-transactions-details/{{$datum['id']}}" class="btn btn-default btn-block btn-sm">内容確認</a></td>
+                              </tr>
+                              @endif
                             <?php $count++;?>
                             @endforeach
                             <!--<tr>

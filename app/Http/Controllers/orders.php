@@ -161,7 +161,8 @@ class orders extends Controller
           $newOrderView->save();
         }
       }
-      return view('company_order_view_all',compact('orders'));
+      $current_allowed_orders=CompanyViewableOrders::where('user_id','=',Auth::id())->pluck('order_id')->toArray();
+      return view('company_order_view_all',compact('orders','current_allowed_orders'));
     }
     public function my_bids()
     {
@@ -175,9 +176,9 @@ class orders extends Controller
         }
       }
       //return $my_orders;
-
+      $current_allowed_orders=CompanyViewableOrders::where('user_id','=',Auth::id())->pluck('order_id')->toArray();
       //$orders=Order::with(['BidCompany','Bid'])->where('bid_status','<>',2)->orderBy('id','desc')->paginate(env('ORDERS_PER_PAGE',5));
-      return view('company_order_view_all',compact('my_orders'));
+      return view('company_order_view_all',compact('my_orders','current_allowed_orders'));
 
       /*$bid_company_ids=Bid::where('bidder_id','=',Auth::id())->get();
       $count=0;
@@ -209,14 +210,15 @@ class orders extends Controller
           $newOrderView->save();
         }
       }
-      return view('company_order_view_all',compact('orders'));
+      $current_allowed_orders=CompanyViewableOrders::where('user_id','=',Auth::id())->pluck('order_id')->toArray();
+      return view('company_order_view_all',compact('orders','current_allowed_orders'));
     }
     public function view_order($order_id)
     {
       $orders=Order::where('id','=',$order_id)->where('bid_status','<>',2)->with(['BidCompany','Bid'])->get();
       //$orders=collect($orders)->reverse();
       $user_id=Order::where('id','=',$order_id)->where('bid_status','<>',2)->value('user_id');
-      $user_name=User::where('id','=',$user_id)->value('company_name');
+      $user_name=User::where('id','=',$user_id)->value('first_name').' '.User::where('id','=',$user_id)->value('last_name');
       //$num_orders=Order::where('user_id','=',$user_id)->where('bid_status','<>',2)->select('id')->get();
       //$other_orders_lists=Order::where('id','<>',$order_id)->with(['BidCompany','Bid'])->get();
       return view('company_order_view',compact('orders','user_name'));
@@ -226,7 +228,7 @@ class orders extends Controller
       $orders=Order::where('id','=',$order_id)->where('bid_status','<>',2)->with(['BidCompany','Bid'])->get();
       //$orders=collect($orders)->reverse();
       $user_id=Order::where('id','=',$order_id)->where('bid_status','<>',2)->value('user_id');
-      $user_name=User::where('id','=',$user_id)->value('company_name');
+      $user_name=User::where('id','=',$user_id)->value('first_name').' '.User::where('id','=',$user_id)->value('last_name');
       $bid_company_id=BidCompany::where('order_id', '=', $order_id)->where('user_id', '=', Auth::id())->value('id');
 
       $already_bidded=Bid::where('bid_company_id','=',$bid_company_id)->first();

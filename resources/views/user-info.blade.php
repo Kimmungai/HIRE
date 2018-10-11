@@ -4,7 +4,7 @@
     <h2>会員情報</h2>
 </div>
 <ol class="breadcrumb">
-    <li><a href="#">トップ</a></li>
+    <li><a href="{{url('/')}}">トップ</a></li>
     <li class="current"><a href="#">会員情報</a></li>
 </ol>
 

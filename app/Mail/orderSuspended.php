@@ -34,6 +34,6 @@ class orderSuspended extends Mailable
     {
       $user=$this->user;
       $order=$this->order;
-      return $this->view('emails.order-suspended',compact('user','order'));
+      return $this->from('info@ths.com', '東京ハイヤークラブ')->view('emails.order-suspended',compact('user','order'));
     }
 }

@@ -105,7 +105,7 @@ class users extends Controller
     public function set_pass(Request $request)
     {
         $user=new User;
-        if($request->input('password')==$request->input('password_check'))
+        if($request->input('password')==$request->input('password_check') && $request->input('password')!='' && $request->input('password_check')!='')
         {
           $user_id = Auth::id();
           $updated_password=bcrypt($request->input('password'));
@@ -114,6 +114,7 @@ class users extends Controller
         }
         else
         {
+          Session::flash('error', "もう一度お試しください!");
           return back();
         }
     }

@@ -84,7 +84,7 @@ $style = [
                                     <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
                                         <!-- Greeting -->
                                         <h1 style="{{ $style['header-1'] }}">
-                                            Hi {{ $company->first_name }}{{ $company->last_name }}. A new order has been posted.
+                                            {{ $company->first_name }}{{ $company->last_name }}様、新しい注文依頼の情報が届きました。
                                         </h1>
 
                                         <!-- order details -->
@@ -94,10 +94,22 @@ $style = [
                                             <td align="center" valign="top">
                                               <table border="1" cellpadding="20" cellspacing="0" width="600" id="emailContainer">
                                                 <tr>
-                                                 <td>Order title:</td><td><strong>{{$order->order_name}}</strong></td>
+                                                 <td>注文名:</td><td><strong>{{$order->order_name}}</strong></td>
                                                 </tr>
                                                 <tr>
-                                                 <td>Pick up date:</td><td><strong>{{$order->pick_up_date}}</strong></td>
+                                                 <td>利用希望台数:</td><td><strong>{{$order->num_of_cars}}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                 <td>お客様 配車手配依頼 希望日</td><td><strong>{{$order->pick_up_date}}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                 <td>お迎えの場所</td><td><strong>{{$order->pick_up_address}}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                 <td>お送り先の場所</td><td><strong>{{$order->drop_off_address}}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                 <td>利用希望台数</td><td><strong>{{$order->num_of_cars}}</strong></td>
                                                 </tr>
                                               </table>
                                             </td>
@@ -108,7 +120,7 @@ $style = [
                                         <!-- Intro -->
 
                                             <p style="{{ $style['paragraph'] }}">
-                                                Click on the button below to bid.
+                                                下記の【確認】をクリックしてください。
                                             </p>
 
 
@@ -125,7 +137,7 @@ $style = [
                                                             style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$actionColor] }}"
                                                             class="button"
                                                             target="_blank">
-                                                            open
+                                                            確認
                                                         </a>
                                                     </td>
                                                 </tr>

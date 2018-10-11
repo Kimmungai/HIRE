@@ -31,6 +31,6 @@ class OrderConfirmed extends Mailable
     public function build()
     {
         $order = $this->order;
-        return $this->view('emails.order-confirmed',compact('order'));
+        return $this->from('info@ths.com', '東京ハイヤークラブ')->view('emails.order-confirmed',compact('order'));
     }
 }

@@ -27,6 +27,6 @@ class EmailVerification extends Mailable
     public function build()
     {
       $user=$this->user;
-      return $this->view('emails.verification',compact('user'));
+      return $this->from('info@ths.com', '東京ハイヤークラブ')->subject('【ご登録ありがとうございます】')->view('emails.verification',compact('user'));
     }
 }

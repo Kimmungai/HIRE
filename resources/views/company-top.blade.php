@@ -6,6 +6,40 @@
 <ol class="breadcrumb">
     <li class="current"><a href="/">トップ</a></li>
 </ol>
+<div class="row">
+  <div class="col-lg-3 col-sm-6 text-center mb-4">
+    <img class="img-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="" />
+    <span style="font-size:1.5em;line-height:200px;" class="fa fa-arrow-right hidden-sm hidden-xs hidden-md pull-right"></span>
+    <h3><i class="fa fa-edit"></i> 登録
+      <small><i class="fa fa-check-circle text-success"></i></small>
+    </h3>
+    <!--<p>What does this team member to? Keep it short! This is also a great spot for social links!</p>-->
+  </div>
+  <div class="col-lg-3 col-sm-6 text-center mb-4">
+    <img class="img-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="" />
+    <span style="font-size:1.5em;line-height:200px;" class="fa fa-arrow-right hidden-sm hidden-xs hidden-md pull-right"></span>
+    <h3><i class="fa fa-user"></i> 承認
+      <small></small>
+    </h3>
+    <!--<p>What does this team member to? Keep it short! This is also a great spot for social links!</p>-->
+  </div>
+  <div class="col-lg-3 col-sm-6 text-center mb-4">
+    <img class="img-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="" />
+    <span style="font-size:1.5em;line-height:200px;" class="fa fa-arrow-right hidden-sm hidden-xs hidden-md pull-right"></span>
+    <h3><i class="fa fa-bell"></i> 入札
+      <small></small>
+    </h3>
+    <!--<p>What does this team member to? Keep it short! This is also a great spot for social links!</p>-->
+  </div>
+  <div class="col-lg-3 col-sm-6 text-center mb-4">
+    <img class="img-circle img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="" />
+    <h3><i class="fa fa-briefcase"></i> 同意して配信する
+      <small></small>
+    </h3>
+    <!--<p>What does this team member to? Keep it short! This is also a great spot for social links!</p>-->
+  </div>
+</div>
+
 <ul class="top-main">
     <li><a class="add" href="/company_order_view_all"><i class="fa fa-list" aria-hidden="true"></i>依頼一覧</a></li>
     <!--<li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i>よくある質問</a></li>
@@ -27,7 +61,6 @@
             <small>依頼名:</small>
             <p>{{$client_datum['order_name']}}</p>
         </div>
-
 
         <div class="part">
             <small>状態:</small>

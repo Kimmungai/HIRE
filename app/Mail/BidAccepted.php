@@ -33,6 +33,6 @@ class BidAccepted extends Mailable
     {
         $order = $this->order;
         $company = $this->company;
-        return $this->view('emails.bid-accepted',compact('order','company'));
+        return $this->from('info@ths.com', '東京ハイヤークラブ')->subject('[注文を承りました]')->view('emails.bid-accepted',compact('order','company'));
     }
 }

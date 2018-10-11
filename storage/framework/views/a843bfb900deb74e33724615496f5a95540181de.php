@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- CSRF Token -->
         <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+        <link rel="stylesheet" href="<?php echo e(url('/css/bootstrap.min.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(url('/css/main.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(url('/css/new.css')); ?>">
         <!--<script src="<?php echo e(url('/js/modernizr-custom.js')); ?>"></script>-->
@@ -300,13 +301,13 @@ function back_company_list(){
   </script>
   <script>
     $( function() {
-      $( "#start_date" ).datepicker();
+      $( "#start_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
       $( "#start_time" ).timepicker();
 
-      $( "#end_date" ).datepicker();
+      $( "#end_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
       $( "#end_time" ).timepicker();
 
-      $( "#deadline-date" ).datepicker();
+      $( "#deadline-date" ).datepicker({ dateFormat: 'yy-mm-dd' });
     } );
     </script>
 </body>

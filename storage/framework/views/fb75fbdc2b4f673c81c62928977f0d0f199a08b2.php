@@ -18,7 +18,7 @@
 <div class="order-card"> <!-- start order card -->
 <div class="row">
     <div class="half">
-    <span class="date"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo e($order['created_at']->format('m/d/Y')); ?></span><?php if((time()-strtotime($order['created_at'])) < 172800): ?><span class="new">新規</span><?php endif; ?>
+    <span class="date"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo e($order['created_at']->format('Y/m/d')); ?></span><?php if((time()-strtotime($order['created_at'])) < 172800): ?><span class="new">新規</span><?php endif; ?>
     <p><strong>注文名：</strong><span><?php echo e($order['order_name']); ?></span></p>
     <p><strong>利用希望台数：</strong><span><?php echo e($order['num_of_cars']); ?></span></p>
     <p><strong>希望車種：</strong><span><?php echo e($order['car_type']); ?></span></p>
@@ -84,7 +84,7 @@
   <div class="order-card"> <!-- start order card -->
   <div class="row">
       <div class="half">
-      <span class="date"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo e($order['order']['created_at']->format('m/d/Y')); ?></span><?php if((time()-strtotime($order['created_at'])) < 172800): ?><span class="new">新規</span><?php endif; ?>
+      <span class="date"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo e($order['order']['created_at']->format('Y/m/d')); ?></span><?php if((time()-strtotime($order['created_at'])) < 172800): ?><span class="new">新規</span><?php endif; ?>
       <p><strong>注文名：</strong><span><?php echo e($order['order']['order_name']); ?></span></p>
       <p><strong>利用希望台数：</strong><span><?php echo e($order['order']['num_of_cars']); ?></span></p>
       <p><strong>希望車種：</strong><span><?php echo e($order['order']['car_type']); ?></span></p>

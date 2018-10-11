@@ -16,8 +16,8 @@
                                 <th>期間</th>
                             </tr>
                             <tr>
-                                <td>user{{$client_data[0]['id']}}</td>
-                                <td>company{{$company_data[0]['id']}}</td>
+                                <td>利用者: {{$client_data[0]['first_name']}} {{$client_data[0]['last_name']}}</td>
+                                <td>ハイヤー会社: {{$company_data[0]['first_name']}} {{$company_data[0]['last_name']}}</td>
                                 <td><select id="chat-period" onchange="getMessages(this.value)">
                                     <option value="1">1ヶ月以内</option>
                                     <option value="2">6ヶ月以内</option>
@@ -31,7 +31,13 @@
                         <div class="message-text">
                             <div class="contact-message" id="contact-message">
                               @foreach($message_data as $message)
-                                <article><div class="date">{{$message['created_at']}}</div><p> {{$message['message']}}</p></article>
+                                <?php
+                                  if($company_data[0]['id'] == $message['user_id']){
+                                    $name=$company_data[0]['first_name'].' '.$company_data[0]['last_name'];
+                                  }else{
+                                    $name=$client_data[0]['first_name'].' '.$client_data[0]['last_name'];
+                                }?>
+                                <article><div class="date">{{$message['created_at']}}</div><p> <small>{{$name}}:</small> {{$message['message']}}</p></article>
                               @endforeach
                             </div>
                         </div>
@@ -53,7 +59,12 @@
                 $('#contact-message').html('');
                 for(count=0;count<messages_obj.length;count++)
                 {
-                  var list_item="<article><div class='date'>"+messages_obj[count].created_at+"</date><p>"+messages_obj[count].message+"</p></article>";
+                  if({{$company_data[0]['id']}} == messages_obj[count].id){
+                    var name={{$company_data[0]['first_name'].' '.$company_data[0]['last_name']}}
+                  }else{
+                    var name={{$client_data[0]['first_name'].' '.$client_data[0]['last_name']}}
+                }
+                  var list_item="<article><div class='date'>"+messages_obj[count].created_at+"</date><p><small>"+name+"</small> "+messages_obj[count].message+"</p></article>";
                   $('#contact-message').append(list_item);
                 }
             });

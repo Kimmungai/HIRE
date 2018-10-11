@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{url('/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url('/css/main.css')}}">
     <link rel="stylesheet" href="{{url('/css/new.css')}}">
 
@@ -15,6 +16,7 @@
     <script src="{{url('/js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{url('/js/jquery-ui.min.js')}}"></script>
     <script src="{{url('/js/jquery.timepicker.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('/js/bootstrap.min.js')}}"></script>
 </head>
 <body>
   <nav>

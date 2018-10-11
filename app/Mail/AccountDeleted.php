@@ -30,6 +30,6 @@ class AccountDeleted extends Mailable
     public function build()
     {
       $user_info=$this->user;
-      return $this->view('emails.account-deleted',compact('user_info'));
+      return $this->from('info@ths.com', '東京ハイヤークラブ')->view('emails.account-deleted',compact('user_info'));
     }
 }

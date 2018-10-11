@@ -6,6 +6,9 @@
 </div>
 <div class="form-register" ng-controller="ConfirmCtrl">
             <h2> ログインの際に使用するパスワードを設定して下さい。 </h2>
+            @if (Session::has('message'))
+            <h2>{{ Session::get('error') }}</h2>
+            @endif
             <form id="password-reset"  role="form" method="POST" action="{{ url('/password/reset') }}">
               {{ csrf_field() }}
               <input type="hidden" name="token" value="{{ $token }}">
