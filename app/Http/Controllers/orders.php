@@ -167,6 +167,7 @@ class orders extends Controller
     public function my_bids()
     {
       $my_orders=BidCompany::with(['Order' => function ($query){$query->where('bid_status','<>',2)->where('suspended','=',0);},'Bid'])->where('user_id','=',Auth::id())->orderBy('id','desc')->paginate(env('ORDERS_PER_PAGE',5));
+      if(!count($my_orders)){return back();}
       foreach($my_orders as $order){
         if(!count(OrderViews::where('order_id','=',$order['id'])->where('user_id','=',Auth::id())->get())){
           $newOrderView=new OrderViews;

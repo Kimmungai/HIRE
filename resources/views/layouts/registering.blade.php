@@ -15,8 +15,7 @@
         <script src="{{url('js/jquery-3.2.1.min.js')}}"></script>
         <script src="{{url('js/jquery-ui.min.js')}}"></script>
         <script src="{{url('js/jquery.timepicker.min.js')}}"></script>
-        <style type="text/css">
-        </style>
+        <style type="text/css"></style>
   </head>
   <body>
     <nav>

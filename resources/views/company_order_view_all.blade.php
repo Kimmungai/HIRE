@@ -20,7 +20,7 @@
 <div class="order-card"> <!-- start order card -->
 <div class="row">
     <div class="half">
-    <span class="date"><i class="fa fa-clock-o" aria-hidden="true"></i> {{$order['created_at']->format('Y/m/d')}}</span>@if((time()-strtotime($order['created_at'])) < 172800)<span class="new">新規</span>@endif
+    <span class="date"><i class="fa fa-clock-o" aria-hidden="true"></i> {{$order['created_at']}}</span>@if((time()-strtotime($order['created_at'])) < 172800)<span class="new">新規</span>@endif
     <p><strong>注文名：</strong><span>{{$order['order_name']}}</span></p>
     <p><strong>利用希望台数：</strong><span>{{$order['num_of_cars']}}</span></p>
     <p><strong>希望車種：</strong><span>{{$order['car_type']}}</span></p>
@@ -82,7 +82,7 @@
   <div class="order-card"> <!-- start order card -->
   <div class="row">
       <div class="half">
-      <span class="date"><i class="fa fa-clock-o" aria-hidden="true"></i> {{$order['order']['created_at']->format('Y/m/d')}}</span>@if((time()-strtotime($order['created_at'])) < 172800)<span class="new">新規</span>@endif
+      <span class="date"><i class="fa fa-clock-o" aria-hidden="true"></i> {{$order['order']['created_at']}}</span>@if((time()-strtotime($order['created_at'])) < 172800)<span class="new">新規</span>@endif
       <p><strong>注文名：</strong><span>{{$order['order']['order_name']}}</span></p>
       <p><strong>利用希望台数：</strong><span>{{$order['order']['num_of_cars']}}</span></p>
       <p><strong>希望車種：</strong><span>{{$order['order']['car_type']}}</span></p>

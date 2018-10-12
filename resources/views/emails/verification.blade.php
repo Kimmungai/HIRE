@@ -84,13 +84,13 @@ $style = [
                                     <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
                                         <!-- Greeting -->
                                         <h1 style="{{ $style['header-1'] }}">
-                                            {{ $user->first_name }}{{ $user->last_name }}様ご登録ありがとうございます。
+                                            {{ $user->first_name }}{{ $user->last_name }}下記の確認ボタンをクリックし、パスワードを設定してください。
                                         </h1>
 
                                         <!-- Intro -->
 
                                             <p style="{{ $style['paragraph'] }}">
-                                                下記のURLをクリックし、アカウント登録完了いたします。
+                                                
                                             </p>
 
 
@@ -117,7 +117,7 @@ $style = [
                                         <!-- Outro -->
 
                                             <p style="{{ $style['paragraph'] }}">
-                                                よろしくお願いいたします。
+
                                             </p>
 
 

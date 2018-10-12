@@ -26,7 +26,7 @@
                                 <th>最新メッセージ</th>
                                 <th></th>
                             </tr>
-                              <?php if($client_data){$count=0;
+                              <?php if($client_data && count($company)){$count=0;
                                while($count < count($client_data)){?>
                               <tr>
                                 <td>user{{$client_data[$count][0]['id']}}</td>

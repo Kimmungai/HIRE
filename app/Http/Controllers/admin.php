@@ -226,16 +226,18 @@ class admin extends Controller
     {
         $chatusers=ChatUsers::get();
         $count=0;
-        if(!count($chatusers)){$client_data=0;$message_data=0;return view('admin.message-hist',compact('client_data','message_data'));}
+        if(!count($chatusers)){$client_data=0;$message_data=0;$company=[];return view('admin.message-hist',compact('client_data','message_data','company'));}
         foreach ($chatusers as $chatuser)
         {
           //$company_data[$count]=User::where('id','=',$chatuser['company_id'])->get();
           $client_data[$count]=User::where('id','=',$chatuser['client_id'])->get();
+          $company_id=ChatUsers::where('client_id','=',$chatuser['client_id'])->value('company_id');
+          $company=User::where('id','=',$company_id)->get();
           $message_data[$count]=ChatMessages::where('chat_users_id','=',$chatuser['id'])->orderBy('id','DESC')->get();
           $count++;
         }
         session(['active_element'=>5]);
-        return view('admin.message-hist',compact('client_data','message_data'));
+        return view('admin.message-hist',compact('client_data','message_data','company'));
     }
     public function message_details($chat_users_id)
     {
@@ -296,7 +298,7 @@ class admin extends Controller
     public function admin_order_send_option(Request $request){
       $order_id=$request->input("admin-order-id-send-option");
       $user_id=$request->input("admin-send-option");
-
+      if($order_id=='' || $user_id==''){return back();}
       if(!count(CompanyViewableOrders::where('order_id','=',$order_id)->where('user_id','=',$user_id)->get())){
         $company=User::where('id','=',$user_id)->first();
         $order=Order::where('id','=',$order_id)->first();

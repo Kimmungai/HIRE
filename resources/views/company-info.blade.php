@@ -33,7 +33,7 @@
     <input name="address" type="text" value="{{$user_details['address']}}" required><br>
     <label>電話番号:</label>
     <input  type="text" value="{{$user_details['tel']}}" required><br>
-        <input type="submit" class="submit" value="保存"  onclick="confirm_update('update_reg_details_form')"/>
+        <input type="submit" class="submit" value="保存"/>
     </form>
     <h3>パスワード変更</h3>
     <h3>{{ Session::get('password_mismatch') }}</h3>
